@@ -88,7 +88,7 @@ namespace 鼠标键盘连点器
         {
             if(dateArr.Count>0 && p < dateArr.Count)
             {
-                if(dateArr.ElementAt(p).timeTickRecord <= timeTickRecord)
+                while(p < dateArr.Count && dateArr.ElementAt(p).timeTickRecord <= timeTickRecord)
                 {
                     //保存当前动作
                     Date1 d = dateArr.ElementAt(p);
@@ -153,7 +153,7 @@ namespace 鼠标键盘连点器
                     }
 
                         //keybd_event
-                        p++;
+                    p++;
                 }
             }
             timeTickRecord++;

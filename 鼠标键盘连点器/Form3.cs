@@ -61,6 +61,14 @@ namespace 鼠标键盘连点器
             timeTickRecord++;
             timeTickConst = 1000 / this.timer1.Interval;
             label1.Text = timeToString();
+            if(mh != null)
+            {
+                var e2 = new MouseEventArgs(MouseButtons.None, 0, p3.X, p3.Y, 0);
+                dateArr.Add(Date1.create(timeTickRecord,
+                Date1.IsMouseOrKeyboard.Mouse,
+                Date1.IsUpOrDown.Up,
+                e2));
+            }
         }
 
         //将时间刻转换成字符串
@@ -113,6 +121,7 @@ namespace 鼠标键盘连点器
         bool RightTag = false;
         Point p1 = new Point(0, 0);
         Point p2 = new Point(0, 0);
+        Point p3 = new Point(0, 0);
         Int64 t1 = 0, t2 = 0;
         
         private void Mouse_Load()
@@ -122,6 +131,7 @@ namespace 鼠标键盘连点器
             mh.MouseDownEvent += mh_MouseDownEvent;
             mh.MouseUpEvent += mh_MouseUpEvent;
             mh.MouseWheelEvent += mh_MouseWheelEvent;
+            mh.MouseMoveEvent += mh_MouseMoveEvent;
         }
 
         //按下鼠标键触发的事件
@@ -192,6 +202,17 @@ namespace 鼠标键盘连点器
             text += e.Delta;
             text += "============\n";
             richTextBox1.Text = text + richTextBox1.Text;
+        }
+
+
+        //鼠标移动触发的事件
+        private void mh_MouseMoveEvent(object sender, MouseEventArgs e)
+        {
+            /*dateArr.Add(Date1.create(timeTickRecord,
+                Date1.IsMouseOrKeyboard.Mouse,
+                Date1.IsUpOrDown.Up,
+                e));*/
+            p3 = e.Location;
         }
 
         #endregion

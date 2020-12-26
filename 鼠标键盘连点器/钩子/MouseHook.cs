@@ -130,6 +130,11 @@ namespace 鼠标键盘连点器
                         //MessageBox.Show("test");
                         //MouseWheelEvent(this, new MouseEventArgs(button, clickCount, point.X, point.Y, zDelta));
                         break;
+                    case WM_MOUSEMOVE:
+                        //鼠标移动事件
+                        var e = new MouseEventArgs(MouseButtons.None, 0, point.X, point.Y, 0);
+                        MouseMoveEvent(this, e);
+                        break;
                 }
 
                 this.Point = new Point(MyMouseHookStruct.pt.x, MyMouseHookStruct.pt.y);
@@ -171,6 +176,11 @@ namespace 鼠标键盘连点器
 
         public delegate void MouseWheelHandler(object sender, MouseEventArgs e);
         public event MouseWheelHandler MouseWheelEvent ;
+
+        /*public delegate void MouseMoveOHandler(object sender, MouseEventArgs e);
+        public event MouseMoveHandler MouseMoveEvent;*/
+
+        //WM_MOUSEMOVE
 
         //this.MouseWheel += new MouseEventHandler(Form1_MouseWheel);
     }
