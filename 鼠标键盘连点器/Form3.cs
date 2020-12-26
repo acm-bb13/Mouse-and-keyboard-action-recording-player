@@ -43,6 +43,7 @@ namespace 鼠标键盘连点器
 
         //窗口关闭时关闭钩子
         public MainForm mainForm = null;
+
         private void Form3_Closed(object sender, FormClosedEventArgs e)
         {
             mh.UnHook();

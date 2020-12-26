@@ -93,6 +93,8 @@ namespace 鼠标键盘连点器
             this.WindowState = FormWindowState.Minimized;
         }
 
+
+        //打开监听窗口
         private void button7_Click(object sender, EventArgs e)
         {
             Form3 form3 = null;
@@ -140,6 +142,8 @@ namespace 鼠标键盘连点器
 
         }
 
+
+        //打开编辑窗口
         private void button8_Click(object sender, EventArgs e)
         {
             this.Visible = false;
@@ -147,9 +151,19 @@ namespace 鼠标键盘连点器
             form4.dates = dates;
             form4.timeTickConst = timeTickConst;
             form4.ShowDialog();
-
             form4.Dispose();
             this.Visible = true;
+        }
+
+
+        //打开播放窗口
+        private void button9_Click(object sender, EventArgs e)
+        {
+            this.Visible = false;
+            Form6 form6 = new Form6();
+            form6.dateArr = dates;
+            form6.mainForm = this;
+            form6.Show();
         }
     }
 }

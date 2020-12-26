@@ -4,6 +4,10 @@ using System.Runtime.InteropServices;
 using System.Text;
 namespace 鼠标键盘连点器
 {
+    /*
+     * Win32Api代码复制来源:
+     * https://blog.csdn.net/hu421160052/article/details/99680147
+     */
     class Win32Api
     {
         [StructLayout(LayoutKind.Sequential)]

@@ -1,0 +1,42 @@
+﻿
+
+《资源出处声明》：
+	键盘钩子代码来源:
+	【梦琪小生】
+	【转】【C#】【全局键盘监听】
+	https://www.cnblogs.com/mqxs/p/7181888.html
+	http://www.bianceng.cn/Programming/csharp/201410/45484.htm
+
+	Win32Api代码复制来源:
+	【C#实现鼠标的全局监听】
+	https://blog.csdn.net/hu421160052/article/details/99680147
+
+	鼠标钩子
+	代码出处：
+	【C#实现鼠标的全局监听】
+	https://blog.csdn.net/hu421160052/article/details/99680147
+
+	图片资源1.jpg出处：
+	【百度：黑客 图片搜索】
+	https://image.baidu.com/search/detail?ct=503316480&z=0&ipn=d&word=%E9%BB%91%E5%AE%A2&step_word=&hs=0&pn=2&spn=0&di=140800&pi=0&rn=1&tn=baiduimagedetail&is=0%2C0&istype=0&ie=utf-8&oe=utf-8&in=&cl=2&lm=-1&st=undefined&cs=2498856380%2C1674302750&os=436238779%2C2430849089&simid=3397274913%2C164867901&adpicid=0&lpn=0&ln=1772&fr=&fmq=1608623852182_R&fm=&ic=undefined&s=undefined&hd=undefined&latest=undefined&copyright=undefined&se=&sme=&tab=0&width=undefined&height=undefined&face=undefined&ist=&jit=&cg=&bdtype=0&oriquery=&objurl=https%3A%2F%2Fgimg2.baidu.com%2Fimage_search%2Fsrc%3Dhttp%3A%2F%2Fs4.51cto.com%2Fwyfs02%2FM02%2F81%2F98%2FwKiom1dF0OOhYGrAAALMtVDkk2g010.jpg-wh_651x-s_2180253300.jpg%26refer%3Dhttp%3A%2F%2Fs4.51cto.com%26app%3D2002%26size%3Df9999%2C10000%26q%3Da80%26n%3D0%26g%3D0n%26fmt%3Djpeg%3Fsec%3D1611547442%26t%3Dfdd1773f82de053595bfe4e740c7d299&fromurl=ippr_z2C%24qAzdH3FAzdH3Fooo_z%26e3Bv51jrh7_z%26e3Bv54AzdH3Ftgu564wpt5gAzdH3F8nb&gsm=3&rpstart=0&rpnum=0&islist=&querylist=&force=undefined
+
+《参考文献》：
+	【C#无法接受keydown事件的原因分析】
+	https://www.cnblogs.com/jife/articles/3247072.html
+	【c#全局鼠标事件以及鼠标事件模拟】
+	https://www.cnblogs.com/lged/p/5499445.html
+	【C#全局键盘监听（Hook）的使用（转载）】
+	https://www.cnblogs.com/zhaoyuncai/p/7684958.html
+	【C#如何监听全局的事件-例如鼠标移动事件】
+	https://blog.csdn.net/wl58796351/article/details/8122003
+	【C# 如何捕获键盘按钮和组合键以及KeyPress/KeyDown事件之间的区别 （附KeyChar/KeyCode值）】
+	https://www.cnblogs.com/feiyuhuo/p/5060773.html
+	【GET_WHEEL_DELTA_WPARAM宏在C＃】
+	https://blog.csdn.net/weixin_30457881/article/details/99135594
+	【在C#中使用全局鼠标、键盘Hook】
+	https://www.cnblogs.com/gc2013/p/3824224.html
+	【c#如何模拟组合键（如ctrl+F）】
+	https://bbs.csdn.net/topics/300040869
+	【C#弹出选择对话框的程序】
+	https://www.cnblogs.com/liulanglang/archive/2009/11/03/1595301.html
+

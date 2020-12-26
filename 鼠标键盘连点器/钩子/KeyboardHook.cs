@@ -7,6 +7,8 @@ namespace 鼠标键盘连点器
     /// <summary>
     /// 键盘钩子
     /// [以下代码来自某网友，并非本人原创]
+    /// 代码来源
+    /// https://www.cnblogs.com/mqxs/p/7181888.html
     /// </summary>
     class KeyboardHook
     {

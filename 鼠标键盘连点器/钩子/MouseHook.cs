@@ -7,6 +7,13 @@ using System.Windows.Forms;
 
 namespace 鼠标键盘连点器
 {
+
+    /*
+     * 鼠标钩子
+     * 代码出处：
+     * https://blog.csdn.net/hu421160052/article/details/99680147
+     */
+
     class MouseHook
     {
         private Point point;

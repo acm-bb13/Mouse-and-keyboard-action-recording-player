@@ -77,6 +77,12 @@
     <Compile Include="Form5.Designer.cs">
       <DependentUpon>Form5.cs</DependentUpon>
     </Compile>
+    <Compile Include="Form6.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form6.Designer.cs">
+      <DependentUpon>Form6.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -116,6 +122,9 @@
     <EmbeddedResource Include="Form5.resx">
       <DependentUpon>Form5.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Form6.resx">
+      <DependentUpon>Form6.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -150,6 +159,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="A-Source-of-statement.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
