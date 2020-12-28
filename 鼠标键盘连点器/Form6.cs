@@ -98,7 +98,7 @@ namespace 鼠标键盘连点器
                     {
                         //0x8000采用绝对坐标
                         //0x0001移动鼠标
-                        int dwFlags = 0x8000 | 0x0001;
+                        int dwFlags = 0x8000 | 0x0001 | 0x0800;
                         int x = 0;
                         int y = 0;
                         //判断按键代码块
@@ -133,10 +133,8 @@ namespace 鼠标键盘连点器
                         mouse_event(dwFlags,
                             x,
                             y,
-                            0,0
+                            d.mouseEventArgs.Delta,0
                            );
-                        richTextBox1.Text = d.mouseEventArgs.X+","+ d.mouseEventArgs.Y +
-                            "\n"+richTextBox1.Text;
                     }
 
                     if (d.isMouseOrKeyboard
@@ -148,8 +146,6 @@ namespace 鼠标键盘连点器
                             dwFlags = 2;
                         keybd_event((byte)d.keyEventArgs.KeyValue
                             ,0,dwFlags,0);
-                        richTextBox1.Text = d.keyEventArgs.KeyCode + "," + dwFlags +
-                            "\n" + richTextBox1.Text;
                     }
 
                         //keybd_event

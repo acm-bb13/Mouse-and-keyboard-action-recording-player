@@ -18,15 +18,15 @@ namespace 鼠标键盘连点器
         public enum IsMouseOrKeyboard { Mouse , Keyboard };
         public IsMouseOrKeyboard isMouseOrKeyboard;
 
+        //是按下还是抬起
+        public enum IsUpOrDown { Up, Down,Move,Wheel};
+        public IsUpOrDown isUpOrDown;
+
         //如果是键盘，保存键盘事件信息
         public KeyEventArgs keyEventArgs;
 
         //如果是鼠标，保存鼠标事件信息
         public MouseEventArgs mouseEventArgs;
-
-        //是按下还是抬起
-        public enum IsUpOrDown { Up, Down };
-        public IsUpOrDown isUpOrDown;
 
 
         //一个用来创建键盘，一个用来创建鼠标事件

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Gma.System.MouseKeyHook;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using System.Runtime.InteropServices;
 namespace 鼠标键盘连点器
 {
     public partial class Form3 : Form
@@ -19,9 +20,15 @@ namespace 鼠标键盘连点器
             InitializeComponent();
         }
 
+        
+
         //DateArr获取;
         private List<Date1> dateArr = new List<Date1>();
-        
+
+        //动作信息
+        public string formName;
+        public string formTime;
+        public string formMessage;
 
         //窗口启动时打开钩子
         private void Form3_Load(object sender, EventArgs e)
@@ -33,6 +40,8 @@ namespace 鼠标键盘连点器
             this.SetDesktopLocation(x, y);
 
             this.TopMost = true;
+
+            timeTickRecord = 0;
             timeTickConst = 1000 / this.timer1.Interval;
             //载入钩子
             Mouse_Load();
@@ -48,8 +57,13 @@ namespace 鼠标键盘连点器
         {
             mh.UnHook();
             k_hook.Stop();
-            mainForm.dates = dateArr;
             mainForm.timeTickConst = timeTickConst;
+            this.timer1.Enabled = false;
+            mainForm.dates = dateArr;
+            if (dateArr.Count > 0)
+            {
+                mainForm.formTime = TimeToStringCH();
+            }
             mainForm.Visible = true;
         }
 
@@ -66,7 +80,7 @@ namespace 鼠标键盘连点器
                 var e2 = new MouseEventArgs(MouseButtons.None, 0, p3.X, p3.Y, 0);
                 dateArr.Add(Date1.create(timeTickRecord,
                 Date1.IsMouseOrKeyboard.Mouse,
-                Date1.IsUpOrDown.Up,
+                Date1.IsUpOrDown.Move,
                 e2));
             }
         }
@@ -114,6 +128,37 @@ namespace 鼠标键盘连点器
             return str;
         }
 
+        string TimeToStringCH()
+        {
+            string text = "";
+            timeTickRecord /= 100;
+            if (timeTickRecord == 0)
+            {
+                return "0秒";
+            }
+            long miao = timeTickRecord % 60;
+            timeTickRecord /= 60;
+            text = miao + "秒" + text;
+            if (timeTickRecord == 0)
+                return text;
+
+            miao = timeTickRecord % 60;
+            timeTickRecord /= 60;
+            text = miao + "分" + text;
+            if (timeTickRecord == 0)
+                return text;
+
+            miao = timeTickRecord % 24;
+            timeTickRecord /= 24;
+            text = miao + "小时" + text;
+            if (timeTickRecord == 0)
+                return text;
+
+            miao = timeTickRecord;
+            text = miao + "天" + text;
+            return text;
+        }
+
         #region 鼠标监听模块
         //载入监听事件
         MouseHook mh;
@@ -130,8 +175,9 @@ namespace 鼠标键盘连点器
             mh.SetHook();
             mh.MouseDownEvent += mh_MouseDownEvent;
             mh.MouseUpEvent += mh_MouseUpEvent;
-            mh.MouseWheelEvent += mh_MouseWheelEvent;
             mh.MouseMoveEvent += mh_MouseMoveEvent;
+            hook = Hook.GlobalEvents();     //新钩子读取滚轮
+            hook.MouseWheelExt += Hook_MouseWheelExt;
         }
 
         //按下鼠标键触发的事件
@@ -195,15 +241,6 @@ namespace 鼠标键盘连点器
                 e));
         }
 
-        //鼠标滚轮触发的事件
-        private void mh_MouseWheelEvent(object sender, MouseEventArgs e)
-        {
-            string text = "";
-            text += e.Delta;
-            text += "============\n";
-            richTextBox1.Text = text + richTextBox1.Text;
-        }
-
 
         //鼠标移动触发的事件
         private void mh_MouseMoveEvent(object sender, MouseEventArgs e)
@@ -213,6 +250,29 @@ namespace 鼠标键盘连点器
                 Date1.IsUpOrDown.Up,
                 e));*/
             p3 = e.Location;
+        }
+
+        //鼠标滚轮触发的事件
+        private IKeyboardMouseEvents hook;
+        private void Hook_MouseWheelExt(object sender, MouseEventExtArgs e)
+        {
+            if (!IsStart) return;
+            string text = "";
+            if (e.Delta > 0)        //鼠标滚轮向前
+            {
+                text += "滚轮向上移动";
+            }
+            else
+            {
+                text += "滚轮向下移动";
+            }
+            text += "\n============\n";
+            richTextBox1.Text = text + richTextBox1.Text;
+
+            dateArr.Add(Date1.create(timeTickRecord,
+                Date1.IsMouseOrKeyboard.Mouse,
+                Date1.IsUpOrDown.Wheel,
+                e));
         }
 
         #endregion
@@ -258,10 +318,14 @@ namespace 鼠标键盘连点器
         private void hook_KeyDown(object sender, KeyEventArgs e)
         {
             string text = "";
+
+            //将当前按键信息转换成可识别的按键信息
             if (!keyNow.Contains( (int)sb(e) ) )
             {
                     keyNow.Add((int)sb(e));
             }
+
+            //判断快捷键是否按下
             if (keyStart.Count > 0 && keyStart.SetEquals(keyNow))
             {
                 button7_Click(null, null);
@@ -272,7 +336,8 @@ namespace 鼠标键盘连点器
             }
             if (keyEnd.Count > 0 && keyEnd.SetEquals(keyNow))
             {
-                button7_Click(null, null);
+                //调用结束按钮事件
+                button2_Click(null, null);
             }
             
 
@@ -332,6 +397,11 @@ namespace 鼠标键盘连点器
             {
                 this.Visible = true;
             }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
 
         //实现暂停继续监听功能

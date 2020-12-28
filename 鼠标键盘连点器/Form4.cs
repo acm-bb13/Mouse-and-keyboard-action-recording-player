@@ -26,42 +26,66 @@ namespace 鼠标键盘连点器
 
         private void Form4_Load(object sender, EventArgs e)
         {
-            /*
-             * DataGridView 禁止列排序
-             * https://www.cnblogs.com/henyihanwobushi/archive/2013/05/15/3079051.html
-             */
-            for (int i = 0; i < this.dataGridView1.Columns.Count; i++)
+
+            //DataGridView 禁止列排序
             {
-                //禁止列排序SortMode = DataGridViewColumnSortMode.NotSortable
-                this.dataGridView1.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
-                //使列长度根据数据的长度来显示
-                this.dataGridView1.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+                /*
+                 * DataGridView 禁止列排序
+                 * https://www.cnblogs.com/henyihanwobushi/archive/2013/05/15/3079051.html
+                 */
+                for (int i = 0; i < this.dataGridView1.Columns.Count; i++)
+                {
+                    //禁止列排序SortMode = DataGridViewColumnSortMode.NotSortable
+                    this.dataGridView1.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
+                    //使列长度根据数据的长度来显示
+                    this.dataGridView1.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+                }
             }
+            
 
             //将监听到的数据显示出来
-            if (dates.Count>0)
-            foreach(Date1 d in dates)
-            {
-                int index = dataGridView1.Rows.Add();
-                int p = 0;
-                dataGridView1.Rows[index].Cells[p++].Value = timeToString(d.timeTickRecord);
-                dataGridView1.Rows[index].Cells[p++].Value = (d.isMouseOrKeyboard == Date1.IsMouseOrKeyboard.Keyboard?"键盘":"鼠标");
-                dataGridView1.Rows[index].Cells[p++].Value = (d.isUpOrDown == Date1.IsUpOrDown.Up? "松开" : "按下");
-                if(d.isMouseOrKeyboard == Date1.IsMouseOrKeyboard.Keyboard)
+            if (dates.Count > 0) {
+                foreach(Date1 d in dates)
                 {
-                    dataGridView1.Rows[index].Cells[p++].Value = d.keyEventArgs.KeyData.ToString();
-                }
-                if (d.isMouseOrKeyboard == Date1.IsMouseOrKeyboard.Mouse)
-                {
-                    string text = "";
-                    if (d.mouseEventArgs.Button == MouseButtons.Left)
-                        text += "左键";
-                    if (d.mouseEventArgs.Button == MouseButtons.Right)
-                        text += "右键";
-                    if (d.mouseEventArgs.Button == MouseButtons.Middle)
-                        text += "中键";
-                    text += "(" + d.mouseEventArgs.X + "," + d.mouseEventArgs.Y + ")";
-                    dataGridView1.Rows[index].Cells[p++].Value = text;
+
+                    if (d.isUpOrDown == Date1.IsUpOrDown.Move)
+                    {
+                        continue;
+                    }
+                    int index = dataGridView1.Rows.Add();
+                    int p = 0;
+                    dataGridView1.Rows[index].Cells[p++].Value = timeToString(d.timeTickRecord);
+                    dataGridView1.Rows[index].Cells[p++].Value = (d.isMouseOrKeyboard == Date1.IsMouseOrKeyboard.Keyboard?"键盘":"鼠标");
+                    dataGridView1.Rows[index].Cells[p++].Value = (d.isUpOrDown == Date1.IsUpOrDown.Up? "松开" : "按下");
+                    if(d.isMouseOrKeyboard == Date1.IsMouseOrKeyboard.Keyboard)
+                    {
+                        dataGridView1.Rows[index].Cells[p++].Value = d.keyEventArgs.KeyData.ToString();
+                    }
+                    if (d.isMouseOrKeyboard == Date1.IsMouseOrKeyboard.Mouse
+                            &&(d.isUpOrDown == Date1.IsUpOrDown.Up||
+                            d.isUpOrDown == Date1.IsUpOrDown.Down))
+                    {
+                        string text = "";
+                        if (d.mouseEventArgs.Button == MouseButtons.Left)
+                            text += "左键";
+                        if (d.mouseEventArgs.Button == MouseButtons.Right)
+                            text += "右键";
+                        if (d.mouseEventArgs.Button == MouseButtons.Middle)
+                            text += "中键";
+                        text += "(" + d.mouseEventArgs.X + "," + d.mouseEventArgs.Y + ")";
+                        dataGridView1.Rows[index].Cells[p++].Value = text;
+                    }
+                    if (d.isMouseOrKeyboard == Date1.IsMouseOrKeyboard.Mouse
+                            && d.isUpOrDown == Date1.IsUpOrDown.Wheel)
+                    {
+                        string text = "";
+                        if (d.mouseEventArgs.Delta > 0)
+                            text += "滚轮向上";
+                        if (d.mouseEventArgs.Delta < 0)
+                            text += "滚轮向下";
+                        text += "(" + d.mouseEventArgs.Delta + ")";
+                        dataGridView1.Rows[index].Cells[p++].Value = text;
+                    }
                 }
             }
         }

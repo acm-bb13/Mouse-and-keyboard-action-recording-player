@@ -183,7 +183,7 @@ namespace 鼠标键盘连点器
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(172, 51);
             this.button7.TabIndex = 24;
-            this.button7.Text = "打开监听窗口";
+            this.button7.Text = "打开播放窗口";
             this.button7.UseVisualStyleBackColor = false;
             // 
             // button3

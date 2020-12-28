@@ -32,8 +32,12 @@ namespace 鼠标键盘连点器
             };
 
         //获取监听数据
+        public Int64 timeTickConst = 10;
+
         public List<Date1> dates = new List<Date1>();
-        public Int64 timeTickConst = 1;
+        public string formName;
+        public string formTime;
+        public string formMessage;
 
         private void MainForm_Load(object sender, EventArgs e)
         {
@@ -164,6 +168,21 @@ namespace 鼠标键盘连点器
             form6.dateArr = dates;
             form6.mainForm = this;
             form6.Show();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            this.Visible = false;
+            Form7 form7 = new Form7();
+            form7.dates = dates;
+            form7.formName = formName;
+            form7.formTime = formTime;
+            form7.formMessage = formMessage;
+
+            form7.ShowDialog();
+
+            form7.Dispose();
+            this.Visible = true;
         }
     }
 }

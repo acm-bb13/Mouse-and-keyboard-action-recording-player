@@ -20,9 +20,9 @@ namespace 鼠标键盘连点器
         public class MouseHookStruct
         {
             public POINT pt;
-            public int hwnd;
-            public int wHitTestCode;
-            public int dwExtraInfo;
+            public IntPtr hwnd;
+            public IntPtr wHitTestCode;
+            public IntPtr dwExtraInfo;
         }
         public delegate int HookProc(int nCode, IntPtr wParam, IntPtr lParam);
         //安装钩子
@@ -34,5 +34,8 @@ namespace 鼠标键盘连点器
         //调用下一个钩子
         [DllImport("user32.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.StdCall)]
         public static extern int CallNextHookEx(int idHook, int nCode, IntPtr wParam, IntPtr lParam);
+    
+        
+
     }
 }

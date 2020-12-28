@@ -109,6 +109,7 @@ namespace 鼠标键盘连点器
             this.button2.TabIndex = 15;
             this.button2.Text = "结束监听";
             this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // Form3
             // 

@@ -66,12 +66,13 @@ namespace 鼠标键盘连点器
         }
         private int MouseHookProc(int nCode, IntPtr wParam, IntPtr lParam)
         {
+            //MessageBox.Show(wParam.ToString("X"));
             Win32Api.MouseHookStruct MyMouseHookStruct = (Win32Api.MouseHookStruct)Marshal.PtrToStructure(lParam, typeof(Win32Api.MouseHookStruct));
             int temp = 2 << 16;
-            int zDelta =(int) wParam % temp;
+            int zDelta =//(int) wParam % temp;
                 //((int)((long)wParam >> 16));
                 //(int)wParam;
-                // NativeMethods.GET_WHEEL_DELTA_WPARAM(wParam);
+                 NativeMethods.GET_WHEEL_DELTA_WPARAM(wParam);
 
             //MouseLLHookStruct mouseHookStruct = (MouseLLHookStruct)Marshal.PtrToStructure(lParam, typeof(MouseLLHookStruct));
             //short mouseDelta = (short)((mouseHookStruct.mouseData >> 16) & 0xffff);
@@ -128,12 +129,14 @@ namespace 鼠标键盘连点器
                         clickCount = 1;
                         MouseUpEvent(this, new MouseEventArgs(button, clickCount, point.X, point.Y, 0));*/
                         //MessageBox.Show("test");
-                        //MouseWheelEvent(this, new MouseEventArgs(button, clickCount, point.X, point.Y, zDelta));
+                        /*var e1 = new MouseEventArgs(MouseButtons.None, 0, point.X, point.Y, zDelta);
+                        MouseWheelEvent(this, e1);*/
+                        
                         break;
                     case WM_MOUSEMOVE:
                         //鼠标移动事件
-                        var e = new MouseEventArgs(MouseButtons.None, 0, point.X, point.Y, 0);
-                        MouseMoveEvent(this, e);
+                        var e2 = new MouseEventArgs(MouseButtons.None, 0, point.X, point.Y, 0);
+                        MouseMoveEvent(this, e2);
                         break;
                 }
 

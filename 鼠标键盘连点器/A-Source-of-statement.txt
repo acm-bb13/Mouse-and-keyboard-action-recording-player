@@ -1,4 +1,20 @@
 ﻿
+Mouse-and-keyboard-action-recording-player
+
+select TABLE_NAME from INFORMATION_SCHEMA.TABLES where TABLE_SCHEMA='Mouse-and-keyboard-action-recording-player' and TABLE_NAME='date1' ;
+
+CREATE TABLE `model333` (
+  `mainKey` int NOT NULL AUTO_INCREMENT,
+  `timeTickRecord` bigint NOT NULL,
+  `IsMouseOrKeyboard` enum('Mouse','Keyboard') DEFAULT NULL,
+  `IsUpOrDown` enum('Up','Down','Move','Wheel') DEFAULT NULL,
+  `KeyEventArgs` int DEFAULT NULL,
+  `MouseButtons` enum('None','Left','Right','Middle','XButton1','XButton2') DEFAULT 'None',
+  `MouseX` int DEFAULT NULL,
+  `MouseY` int DEFAULT NULL,
+  `MouseDelta` int DEFAULT NULL,
+  PRIMARY KEY (`mainKey`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 《资源出处声明》：
 	键盘钩子代码来源:
@@ -15,6 +31,10 @@
 	代码出处：
 	【C#实现鼠标的全局监听】
 	https://blog.csdn.net/hu421160052/article/details/99680147
+
+	鼠标滚轮监听：
+	【C# 音量控制器 Volume Controler（全局快捷键）】
+	https://www.bilibili.com/video/BV1i54y1k7Jc
 
 	图片资源1.jpg出处：
 	【百度：黑客 图片搜索】
@@ -40,3 +60,4 @@
 	【C#弹出选择对话框的程序】
 	https://www.cnblogs.com/liulanglang/archive/2009/11/03/1595301.html
 
+	
