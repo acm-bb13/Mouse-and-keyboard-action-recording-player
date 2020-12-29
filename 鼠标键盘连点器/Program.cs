@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace 鼠标键盘连点器
+namespace 动作监听播放器
 {
     static class Program
     {

@@ -10,20 +10,11 @@ using System.Windows.Forms;
 
 namespace 动作监听播放器
 {
-    public partial class Form9 : Form
+    public partial class Form13 : Form
     {
-        public Form9(string str1)
+        public Form13()
         {
             InitializeComponent();
-            this.ControlBox = false;
-            this.Text = str1;
         }
-
-        private void Form9_Load(object sender, EventArgs e)
-        {
-
-        }
-
-
     }
 }

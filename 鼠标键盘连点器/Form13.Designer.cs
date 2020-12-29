@@ -1,7 +1,7 @@
 ﻿
 namespace 动作监听播放器
 {
-    partial class MouseTest
+    partial class Form13
     {
         /// <summary>
         /// Required designer variable.
@@ -29,27 +29,32 @@ namespace 动作监听播放器
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form13));
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
             // richTextBox1
             // 
+            this.richTextBox1.BackColor = System.Drawing.SystemColors.InactiveCaptionText;
             this.richTextBox1.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.richTextBox1.Location = new System.Drawing.Point(12, 12);
+            this.richTextBox1.ForeColor = System.Drawing.Color.Magenta;
+            this.richTextBox1.Location = new System.Drawing.Point(2, 12);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(221, 464);
+            this.richTextBox1.Size = new System.Drawing.Size(447, 474);
             this.richTextBox1.TabIndex = 0;
-            this.richTextBox1.Text = "Test";
+            this.richTextBox1.Text = resources.GetString("richTextBox1.Text");
             // 
-            // MouseTest
+            // Form13
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(251, 488);
+            this.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.ClientSize = new System.Drawing.Size(454, 489);
             this.Controls.Add(this.richTextBox1);
-            this.Name = "MouseTest";
-            this.Text = "鼠标全局监听测试";
-            this.Load += new System.EventHandler(this.MouseTest_Load);
+            this.ForeColor = System.Drawing.Color.Magenta;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
+            this.Name = "Form13";
+            this.Text = "免责声明";
             this.ResumeLayout(false);
 
         }

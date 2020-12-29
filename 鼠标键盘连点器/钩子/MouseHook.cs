@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
 
-namespace 鼠标键盘连点器
+namespace 动作监听播放器
 {
 
     /*

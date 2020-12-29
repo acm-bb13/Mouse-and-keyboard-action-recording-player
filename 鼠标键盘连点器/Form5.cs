@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace 鼠标键盘连点器
+namespace 动作监听播放器
 {
     public partial class Form5 : Form
     {

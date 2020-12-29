@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace 鼠标键盘连点器.Properties {
+namespace 动作监听播放器.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

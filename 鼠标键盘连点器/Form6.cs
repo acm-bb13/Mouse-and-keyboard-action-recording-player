@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace 鼠标键盘连点器
+namespace 动作监听播放器
 {
     public partial class Form6 : Form
     {
@@ -32,20 +32,37 @@ namespace 鼠标键盘连点器
         [System.Runtime.InteropServices.DllImport("user32.dll")]
         public static extern void keybd_event(byte bVk, byte bScan, int dwFlags, int dwExtraInfo);
 
-        //DateArr为当前要播放的动作
         public List<Date1> dateArr = new List<Date1>();
         int p = 0;
+
 
         //窗口关闭时关闭钩子
         public MainForm mainForm = null;
 
         //计时
-        public static Int64 timeTickRecord = 0;
         public Int64 timeTickConst = 1;
 
+
+        bool isPlaying = false;
+        bool isLoop = false;
+        int playCount = 1;
         private void button1_Click(object sender, EventArgs e)
         {
-            start();
+            if (!isPlaying)
+            {
+                //判断次数播放还是循环播放
+                if (radioButton1.Checked)
+                {
+                    isLoop = false;
+                    playCount = int.Parse(textBox1.Text);
+                    start();
+                }
+                if (radioButton2.Checked)
+                {
+                    isLoop = true;
+                    start();
+                }
+            }
         }
 
         private void Form6_Load(object sender, EventArgs e)
@@ -59,17 +76,26 @@ namespace 鼠标键盘连点器
             //使应用始终显示在顶层
             this.TopMost = true;
 
+            showKeyText();
 
+            //载入键盘钩子，监听快捷方式
+            Keyboard_Load();
         }
 
         private void Form6_Closed(object sender, FormClosedEventArgs e)
         {
+            mainForm.keyEnd = keyEnd;
             mainForm.Visible = true;
+            k_hook.Stop();
         }
+
+        public long timeTickRecord = 0;
 
         //执行开始播放功能
         void start()
         {
+            this.Visible = false;
+            isPlaying = true;
             this.timer1.Enabled = true;
             timeTickConst = 1000 / timer1.Interval;
             p = 0;
@@ -78,6 +104,8 @@ namespace 鼠标键盘连点器
 
         void stop()
         {
+            this.Visible = true;
+            isPlaying = false;
             this.timer1.Enabled = false;
             timeTickConst = 1000 / timer1.Interval;
             p = 0;
@@ -155,9 +183,162 @@ namespace 鼠标键盘连点器
             timeTickRecord++;
             if(p >= dateArr.Count)
             {
-                stop();
+                if (!isLoop)
+                {
+                    playCount--;
+                    if (playCount > 0)
+                    {
+                        start();
+                    }
+                    else
+                    {
+                        stop();
+                    }
+                }
+                else
+                {
+                    start();
+                }
             }
 
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        //当键盘输入框时
+        private void TextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar != '\b' && !Char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+
+        }
+
+
+        //当输入框变化时
+        private void textBox1_TextChanged_1(object sender, EventArgs e)
+        {
+            if(textBox1.Text == "" || textBox1.Text == "0")
+            {
+                textBox1.Text = "1";
+            }
+        }
+
+        //更新显示快捷方式
+        void showKeyText()
+        {
+            SortedSet<int> key = keyEnd;
+            string text = "终止播放快捷方式\n(";
+            bool p = false;
+            foreach (int i in key)
+            {
+                if (p)
+                    text += "+";
+                else
+                    p = true;
+                Keys keys = (Keys)i;
+                if (keys == Keys.ControlKey)
+                    text += "Ctrl";
+                else if (keys == Keys.ShiftKey)
+                    text += "Shift";
+                else if (keys == Keys.Menu)
+                    text += "Alt";
+                else
+                    text += keys.ToString();
+            }
+            text += ")";
+            if (key.Count() == 0)
+            {
+                text = "未设置快捷键";
+            }
+            if (key == keyEnd)
+                this.button2.Text = text;
+        }
+
+        #region 键盘监听模块
+
+        KeyboardHook k_hook;
+
+        internal List<Date1> DateArr { get => dateArr; set => dateArr = value; }
+
+        //载入监听模块
+        private void Keyboard_Load()
+        {
+            k_hook = new KeyboardHook();
+            k_hook.KeyDownEvent += new KeyEventHandler(hook_KeyDown);//钩住键按下
+            k_hook.KeyUpEvent += new KeyEventHandler(hook_KeyUpEvent); ;
+            k_hook.Start();//安装键盘钩子
+        }
+
+
+        //恶心的bug
+        Keys sb(KeyEventArgs e)
+        {
+            Keys k = e.KeyCode;
+            if (e.KeyCode == Keys.Control ||
+                    e.KeyCode == Keys.LControlKey ||
+                    e.KeyCode == Keys.RControlKey
+                    )
+                k = Keys.ControlKey;
+            else if (e.KeyCode == Keys.Alt ||
+                e.KeyCode == Keys.LMenu ||
+                e.KeyCode == Keys.RMenu
+                )
+                k = Keys.Menu;
+            else if (e.KeyCode == Keys.Shift ||
+                e.KeyCode == Keys.LShiftKey ||
+                e.KeyCode == Keys.RShiftKey
+                )
+                k = Keys.ShiftKey;
+            return k;
+        }
+
+        //保存终止快捷键
+        public SortedSet<int> keyEnd = new SortedSet<int>();
+
+        //当前已按下的按键
+        public SortedSet<int> keyNow = new SortedSet<int>();
+
+        //当键盘按下时
+        private void hook_KeyDown(object sender, KeyEventArgs e)
+        {
+            //将当前按键信息转换成可识别的按键信息
+            if (!keyNow.Contains((int)sb(e)))
+            {
+                keyNow.Add((int)sb(e));
+            }
+
+            if (keyEnd.Count > 0 && keyEnd.SetEquals(keyNow))
+            {
+                //调用结束按钮事件
+                stop();
+            }
+        }
+
+        //按键松开时
+        private void hook_KeyUpEvent(object sender, KeyEventArgs e)
+        {
+            //按键松开，移出列表
+            if (keyNow.Contains((int)sb(e)))
+            {
+                keyNow.Remove((int)sb(e));
+            }
+        }
+        #endregion
+
+        //更改快捷方式
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Form2 form2 = new Form2();
+            form2.ShowDialog();
+            if (form2.ppp == 0)
+                keyEnd = form2.keyArr;
+            form2.Dispose();
+            showKeyText();
         }
     }
 }

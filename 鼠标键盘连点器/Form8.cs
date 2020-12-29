@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace 鼠标键盘连点器
+namespace 动作监听播放器
 {
     public partial class Form8 : Form
     {
@@ -44,7 +44,7 @@ namespace 鼠标键盘连点器
 
         private void Form8_Load(object sender, EventArgs e)
         {
-            formTime = TimeToString();
+            //formTime = TimeToString();
             label4.Text = formTime;
             formName = textBox1.Text;
             formMessage = richTextBox1.Text;

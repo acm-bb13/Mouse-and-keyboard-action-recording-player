@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Microsoft.Win32;
 
-namespace 鼠标键盘连点器
+namespace 动作监听播放器
 {
     public partial class Form4 : Form
     {
@@ -18,112 +20,171 @@ namespace 鼠标键盘连点器
         }
 
 
+        public MainForm mainForm;
+
         //监听数据
         public List<Date1> dates = new List<Date1>();
+        public string formName;
+        public string formTime;
+        public string formMessage;
 
-        //单位毫秒
-        public Int64 timeTickConst = 1;
 
         private void Form4_Load(object sender, EventArgs e)
         {
 
-            //DataGridView 禁止列排序
-            {
-                /*
-                 * DataGridView 禁止列排序
-                 * https://www.cnblogs.com/henyihanwobushi/archive/2013/05/15/3079051.html
-                 */
-                for (int i = 0; i < this.dataGridView1.Columns.Count; i++)
-                {
-                    //禁止列排序SortMode = DataGridViewColumnSortMode.NotSortable
-                    this.dataGridView1.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
-                    //使列长度根据数据的长度来显示
-                    this.dataGridView1.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-                }
-            }
-            
+        }
 
-            //将监听到的数据显示出来
-            if (dates.Count > 0) {
+        private void button2_Click(object sender, EventArgs e)
+        {
+            duqu();
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            string s1 = "编辑动作信息";
+            string s2 = formName;
+            string s3 = formTime;
+            string s4 = formMessage;
+            string s5 = "保存";
+            Form11 form11 = new Form11(s1,s2,s3,s4,s5);
+            form11.ShowDialog();
+            if (form11.isAns)
+            {
+                baocun();
+            }
+        }
+
+        void baocun()
+        {
+
+            SaveFileDialog SaveAddr = new SaveFileDialog();
+            SaveAddr.Filter = "动作信息文件(*.dodata)|*.dodata";
+            SaveAddr.DefaultExt = "*.dodata";//默认文件扩展名
+            if (SaveAddr.ShowDialog() == DialogResult.OK)
+            {
+                string result = "《未加密动作信息》"; //输入文本
+
+                StreamWriter sw = new StreamWriter(SaveAddr.FileName, false);
+
+                sw.WriteLine(result);
+
+                sw.WriteLine(formName);
+                sw.WriteLine(formTime);
+                sw.WriteLine(formMessage);
+                result = "<!===================================!>";
+                sw.WriteLine(result);
                 foreach(Date1 d in dates)
                 {
+                    string str = "";
+                    str += d.timeTickRecord + ",";
+                    str += (int)d.isMouseOrKeyboard + ",";
+                    str += (int)d.isUpOrDown + ",";
 
-                    if (d.isUpOrDown == Date1.IsUpOrDown.Move)
-                    {
-                        continue;
-                    }
-                    int index = dataGridView1.Rows.Add();
-                    int p = 0;
-                    dataGridView1.Rows[index].Cells[p++].Value = timeToString(d.timeTickRecord);
-                    dataGridView1.Rows[index].Cells[p++].Value = (d.isMouseOrKeyboard == Date1.IsMouseOrKeyboard.Keyboard?"键盘":"鼠标");
-                    dataGridView1.Rows[index].Cells[p++].Value = (d.isUpOrDown == Date1.IsUpOrDown.Up? "松开" : "按下");
                     if(d.isMouseOrKeyboard == Date1.IsMouseOrKeyboard.Keyboard)
                     {
-                        dataGridView1.Rows[index].Cells[p++].Value = d.keyEventArgs.KeyData.ToString();
+                        str += (int)d.keyEventArgs.KeyData ;
                     }
-                    if (d.isMouseOrKeyboard == Date1.IsMouseOrKeyboard.Mouse
-                            &&(d.isUpOrDown == Date1.IsUpOrDown.Up||
-                            d.isUpOrDown == Date1.IsUpOrDown.Down))
+
+                    if (d.isMouseOrKeyboard == Date1.IsMouseOrKeyboard.Mouse)
                     {
-                        string text = "";
-                        if (d.mouseEventArgs.Button == MouseButtons.Left)
-                            text += "左键";
-                        if (d.mouseEventArgs.Button == MouseButtons.Right)
-                            text += "右键";
-                        if (d.mouseEventArgs.Button == MouseButtons.Middle)
-                            text += "中键";
-                        text += "(" + d.mouseEventArgs.X + "," + d.mouseEventArgs.Y + ")";
-                        dataGridView1.Rows[index].Cells[p++].Value = text;
+                        str += (int)d.mouseEventArgs.Button + ",";
+                        str += d.mouseEventArgs.X + ",";
+                        str += d.mouseEventArgs.Y + ",";
+                        str += d.mouseEventArgs.Delta;
                     }
-                    if (d.isMouseOrKeyboard == Date1.IsMouseOrKeyboard.Mouse
-                            && d.isUpOrDown == Date1.IsUpOrDown.Wheel)
+                    sw.WriteLine(str);
+                }
+                sw.Flush();
+                sw.Close();
+            }
+
+           
+        }
+
+        void duqu()
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "动作信息文件(*.dodata)|*.dodata|所有文件|*.*";
+            ofd.ValidateNames = true;
+            ofd.CheckPathExists = true;
+            ofd.CheckFileExists = true;
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                string strFileName = ofd.FileName;
+                //其他代码
+                string[] lines = System.IO.File.ReadAllLines(strFileName);
+                int mod = 1;
+                
+                //MessageBox.Show("读取成功");
+                foreach (string line in lines)
+                {
+                    if (mod == 1 &&!"《未加密动作信息》".Equals(line))
                     {
-                        string text = "";
-                        if (d.mouseEventArgs.Delta > 0)
-                            text += "滚轮向上";
-                        if (d.mouseEventArgs.Delta < 0)
-                            text += "滚轮向下";
-                        text += "(" + d.mouseEventArgs.Delta + ")";
-                        dataGridView1.Rows[index].Cells[p++].Value = text;
+                        MessageBox.Show("警告!该文件非动作信息!");
+                        return;
+                    }
+                    else if (mod == 1)
+                    {
+                        mod = 2;
+                        dates = new List<Date1>();
+                        continue;
+                    }
+                    if (mod == 2)
+                    {
+                        formName = line;
+                        mod++;
+                        continue;
+                    }
+                    if (mod == 3)
+                    {
+                        formTime = line;
+                        formMessage = "";
+                        mod++;
+                        continue;
+                    }
+                    string temp = "<!===================================!>";
+                    
+                    if (mod == 4 && !temp.Equals(line))
+                    {
+                        formMessage += line;
+                        continue;
+                    }else if(mod == 4)
+                    {
+                        mod = 5;
+                        continue;
+                    }
+                    if(mod == 5)
+                    {
+                        string[] str = line.Split(',');
+                        long x1 = long.Parse(str[0]);
+                        Date1.IsMouseOrKeyboard x2 = (Date1.IsMouseOrKeyboard)int.Parse(str[1]);
+                        Date1.IsUpOrDown x3 = (Date1.IsUpOrDown)int.Parse(str[2]);
+                        if (x2 == Date1.IsMouseOrKeyboard.Keyboard)
+                        {
+                            Keys x4 = (Keys)int.Parse(str[3]);
+                            dates.Add(Date1.create(
+                                x1,
+                            x2,
+                            x3,
+                            new KeyEventArgs(x4)
+                            ));
+                        }
+                        if (x2 == Date1.IsMouseOrKeyboard.Mouse)
+                        {
+                            MouseButtons x5 = (MouseButtons)int.Parse(str[3]);
+                            int x6 = int.Parse(str[4]);
+                            int x7 = int.Parse(str[5]);
+                            int x8 = int.Parse(str[6]);
+                            dates.Add(Date1.create(
+                                x1,
+                            x2,
+                            x3,
+                            new MouseEventArgs(x5, 0, x6, x7, x8)
+                            ));
+                        }
                     }
                 }
             }
-        }
-
-        string timeToString(Int64 tt)
-        {
-            Int64 day, hour, minute, second, millisecond;
-            Int64 time = tt;
-            millisecond = time % timeTickConst;
-            time /= timeTickConst;
-            second = time % 60;
-            time /= 60;
-            minute = time % 60;
-            time /= 60;
-            hour = time % 24;
-            time /= 24;
-            day = time;
-            int p = 1;
-            while (Math.Pow(10, p - 1) != timeTickConst) 
-                p++;
-            string str = string.Format("{0:D2}", day) + ":" +
-                string.Format("{0:D2}", hour) + ":" +
-                string.Format("{0:D2}", minute) + ":" +
-                string.Format("{0:D2}", second) + ":" +
-                string.Format("{0:D"+p+"}", millisecond);
-            return str;
-        }
-
-
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            if(dates.Count>0)
-            label1.Text = "("+ dataGridView1.CurrentRow.Index+"," + dataGridView1.CurrentCell.ColumnIndex+ ")";
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            //dataGridView1.AllowSorting = false;
         }
     }
 }

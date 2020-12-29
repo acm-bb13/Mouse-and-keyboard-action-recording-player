@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace 鼠标键盘连点器
+namespace 动作监听播放器
 {
     public partial class MainForm : Form
     {
@@ -35,9 +35,9 @@ namespace 鼠标键盘连点器
         public Int64 timeTickConst = 10;
 
         public List<Date1> dates = new List<Date1>();
-        public string formName;
-        public string formTime;
-        public string formMessage;
+        public string formName = "未命名";
+        public string formTime = "0秒";
+        public string formMessage = "无描述";
 
         private void MainForm_Load(object sender, EventArgs e)
         {
@@ -48,11 +48,8 @@ namespace 鼠标键盘连点器
 
         private void button1_Click(object sender, EventArgs e)
         {
-            this.Visible = false;
-            MouseTest mouseTest = new MouseTest();
-            mouseTest.ShowDialog();
-            mouseTest.Dispose();
-            this.Visible = true;
+            Form13 form13 = new Form13();
+            form13.ShowDialog();
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -131,6 +128,10 @@ namespace 鼠标键盘连点器
             }
         }
 
+        int r = 0;
+        int g = 250;
+        int b = 250;
+        int cooo = 10;
         private void timer1_Tick(object sender, EventArgs e)
         {
             string ss = this.richTextBox1.Text;
@@ -139,6 +140,24 @@ namespace 鼠标键盘连点器
             string str = ssArr[0];
             string str2 = ssArr[1];
             this.richTextBox1.Text = str2+"\n" + str;
+
+            if(g >= 235 && b < 235)
+            {
+                b += cooo;
+                r -= cooo;
+            }else
+            if (b >= 235 && r < 235)
+            {
+                r += cooo;
+                g -= cooo;
+            }
+            else
+            if (r >= 235 && g < 235)
+            {
+                g += cooo;
+                b -= cooo;
+            }
+            this.button5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(r)))), ((int)(((byte)(g)))), ((int)(((byte)(b)))));
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -147,17 +166,7 @@ namespace 鼠标键盘连点器
         }
 
 
-        //打开编辑窗口
-        private void button8_Click(object sender, EventArgs e)
-        {
-            this.Visible = false;
-            Form4 form4 = new Form4();
-            form4.dates = dates;
-            form4.timeTickConst = timeTickConst;
-            form4.ShowDialog();
-            form4.Dispose();
-            this.Visible = true;
-        }
+        
 
 
         //打开播放窗口
@@ -166,23 +175,47 @@ namespace 鼠标键盘连点器
             this.Visible = false;
             Form6 form6 = new Form6();
             form6.dateArr = dates;
+            form6.keyEnd = keyEnd;
             form6.mainForm = this;
             form6.Show();
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            this.Visible = false;
+            //this.Visible = false;
             Form7 form7 = new Form7();
             form7.dates = dates;
             form7.formName = formName;
             form7.formTime = formTime;
             form7.formMessage = formMessage;
-
+            form7.mainForm = this;
             form7.ShowDialog();
 
             form7.Dispose();
-            this.Visible = true;
+            //this.Visible = true;
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            //this.Visible = false;
+            Form4 form4 = new Form4();
+            form4.dates = dates;
+            form4.formName = formName;
+            form4.formTime = formTime;
+            form4.formMessage = formMessage;
+            form4.mainForm = this;
+            form4.ShowDialog();
+            dates = form4.dates;
+            formName = form4.formName;
+            formTime = form4.formTime;
+            formMessage = form4.formMessage;
+            //this.Visible = true;
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            Form12 form12 = new Form12();
+            form12.ShowDialog();
         }
     }
 }

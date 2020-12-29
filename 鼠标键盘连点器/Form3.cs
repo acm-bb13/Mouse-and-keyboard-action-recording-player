@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
-namespace 鼠标键盘连点器
+namespace 动作监听播放器
 {
     public partial class Form3 : Form
     {

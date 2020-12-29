@@ -1,5 +1,5 @@
 ﻿
-namespace 鼠标键盘连点器
+namespace 动作监听播放器
 {
     partial class Form3
     {
@@ -57,7 +57,7 @@ namespace 鼠标键盘连点器
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.Color.DimGray;
+            this.label1.BackColor = System.Drawing.Color.Black;
             this.label1.Font = new System.Drawing.Font("宋体", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label1.ForeColor = System.Drawing.Color.Magenta;
             this.label1.Location = new System.Drawing.Point(12, 138);
@@ -124,7 +124,7 @@ namespace 鼠标键盘连点器
             this.Controls.Add(this.richTextBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "Form3";
-            this.Text = "鼠标键盘监听器";
+            this.Text = "动作监听器";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form3_Closed);
             this.Load += new System.EventHandler(this.Form3_Load);
             this.ResumeLayout(false);

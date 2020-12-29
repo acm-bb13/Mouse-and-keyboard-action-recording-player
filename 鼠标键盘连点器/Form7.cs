@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace 鼠标键盘连点器
+namespace 动作监听播放器
 {
     public partial class Form7 : Form
     {
@@ -23,6 +23,8 @@ namespace 鼠标键盘连点器
         public string formTime;
         public string formMessage;
 
+        public MainForm mainForm;
+
 
         private void Form7_Load(object sender, EventArgs e)
         {
@@ -31,10 +33,12 @@ namespace 鼠标键盘连点器
 
         }
 
+
+        //刷新列表
         void flush()
         {
             if (dataGridView1.Rows.Count > 0) { dataGridView1.Rows.Clear(); }
-            string sql = "select * from amainform";
+            string sql = "select * from amainform ORDER BY mainKey DESC";
             MySqlDataReader mySql = SQLManage.GetReader(sql);
             int record = 0;
             while (mySql.Read())
@@ -42,9 +46,10 @@ namespace 鼠标键盘连点器
                 record++;
                 int index = dataGridView1.Rows.Add();
                 int p = 0;
-                dataGridView1.Rows[index].Cells[p++].Value = mySql[p];
-                dataGridView1.Rows[index].Cells[p++].Value = mySql[p];
-                dataGridView1.Rows[index].Cells[p++].Value = mySql[p];
+                dataGridView1.Rows[index].Cells[p].Value = mySql[p++].ToString();
+                dataGridView1.Rows[index].Cells[p].Value = mySql[p++];
+                dataGridView1.Rows[index].Cells[p].Value = mySql[p++];
+                dataGridView1.Rows[index].Cells[p].Value = mySql[p++];
             }
             if (record == 0)
             {
@@ -57,9 +62,11 @@ namespace 鼠标键盘连点器
             SQLManage.closeConn();
         }
 
+
+        //上传本地动作
         void UpData()
         {
-            Form9 form9 = new Form9("正在上传......", "正在上传动作");
+            Form9 form9 = new Form9("正在上传......");
             form9.progressBar1.Maximum = dates.Count;
             form9.progressBar1.Step = 1;
             form9.Show();
@@ -133,23 +140,131 @@ namespace 鼠标键盘连点器
             form9.Dispose();
         }
 
+        void DownData(int mainkey)
+        {
+            string sql;
+
+            //获取动作长度
+            sql = "SELECT mainKey FROM data"+mainkey+" ORDER BY mainKey DESC LIMIT 1;";
+            MySqlDataReader mySql = SQLManage.GetReader(sql);
+            mySql.Read();
+            int size = (int)mySql[0];
+            SQLManage.closeConn();
+
+            //弹出加载窗口
+            Form9 form9 = new Form9("正在下载动作......");
+            form9.progressBar1.Maximum = size;
+            form9.progressBar1.Step = 1;
+            form9.Show();
+
+            //创建临时动作保存
+            List<Date1> date1 = new List<Date1>();
+            sql = "SELECT * FROM data"+mainkey+" ORDER BY mainKey;";
+            mySql = SQLManage.GetReader(sql);
+            while (mySql.Read())
+            {
+                //将数据库的动作读取出来
+
+                long x1 = (long)mySql[1]; 
+                Date1.IsMouseOrKeyboard x2 = (Date1.IsMouseOrKeyboard)mySql[2];
+                Date1.IsUpOrDown x3 = (Date1.IsUpOrDown)mySql[3];
+                if(x2 == Date1.IsMouseOrKeyboard.Keyboard)
+                {
+                    Keys x4 = (Keys)mySql[4];
+                    date1.Add(Date1.create(
+                        x1,
+                    x2,
+                    x3,
+                    new KeyEventArgs(x4)
+                    ));
+                }
+                if (x2 == Date1.IsMouseOrKeyboard.Mouse)
+                {
+                    MouseButtons x5 = (MouseButtons)mySql[5];
+                    int x6 = (int)mySql[6];
+                    int x7 = (int)mySql[7];
+                    int x8 = (int)mySql[8];
+                    date1.Add(Date1.create(
+                        x1,
+                    x2,
+                    x3,
+                    new MouseEventArgs(x5,0,x6,x7,x8)
+                    ));
+                }
+                //进度条往前一格
+                form9.progressBar1.PerformStep();
+            }
+            //读取完毕
+            SQLManage.closeConn();
+
+            //读取动作名称长度介绍等信息
+            sql = "SELECT * FROM amainform WHERE mainKey = 22;";
+            mySql = SQLManage.GetReader(sql);
+            mySql.Read();
+            formName = (string)mySql[1];
+            formTime = (string)mySql[2];
+            formMessage = (string)mySql[3];
+            SQLManage.closeConn();
+            form9.Close();
+            form9.Dispose();
+
+            //同步主窗口和本窗口的数据
+            dates = date1;
+            mainForm.dates = date1;
+            mainForm.formName = formName;
+            mainForm.formTime = formTime;
+            mainForm.formMessage = formMessage;
+
+            MessageBox.Show(formName + "\n动作下载完成");
+        }
+
+
+        //点击上传动作时
         private void button1_Click(object sender, EventArgs e)
         {
             Form8 form8 = new Form8();
             form8.formTime = formTime;
+
             form8.ShowDialog();
             if (form8.ans)
             {
                 formName = form8.formName;
                 formMessage = form8.formMessage;
+                UpData();
             }
             form8.Dispose();
-            UpData();
         }
 
+        //点击刷新时
         private void button2_Click(object sender, EventArgs e)
         {
             flush();
+        }
+
+
+
+
+        //点击查看动作时
+        private void button3_Click(object sender, EventArgs e)
+        {
+            //获取选中mainKey
+            //dataGridView1.CurrentRow.Index;
+            int index = dataGridView1.CurrentRow.Index;
+            int mainkey = int.Parse(dataGridView1.Rows[index].Cells[0].Value.ToString());
+            //测试点
+            //MessageBox.Show(mainkey+"");
+
+            //读取选中的动作信息并召唤弹窗
+            string s1 = dataGridView1.Rows[index].Cells[1].Value.ToString();
+            string s2 = dataGridView1.Rows[index].Cells[2].Value.ToString();
+            string s3 = dataGridView1.Rows[index].Cells[3].Value.ToString();
+            Form10 form10 = new Form10(s1,s2,s3);
+            form10.ShowDialog();
+            if (form10.isAns)
+            {
+                DownData(mainkey);
+            }
+            form10.Dispose();
         }
     }
 }

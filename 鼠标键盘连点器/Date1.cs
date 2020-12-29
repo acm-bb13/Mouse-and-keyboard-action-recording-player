@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace 鼠标键盘连点器
+namespace 动作监听播放器
 {
     //用来储存动作信息
     public class Date1
@@ -56,6 +56,28 @@ namespace 鼠标键盘连点器
             if (isMouseOrKeyboard == IsMouseOrKeyboard.Keyboard)
             {
                 date1 = new Date1(timeTickRecord, isMouseOrKeyboard, isUpOrDown, (KeyEventArgs)eventArgs);
+            }
+            return date1;
+        }
+
+        public static Date1 create(
+            long timeTickRecord, 
+            IsMouseOrKeyboard isMouseOrKeyboard,
+            IsUpOrDown isUpOrDown,
+            KeyEventArgs keyEventArgs,
+            MouseButtons mouseButtons , 
+            int X ,
+            int Y ,
+            int MouseDelta)
+        {
+            Date1 date1 = null;
+            if (isMouseOrKeyboard == IsMouseOrKeyboard.Mouse)
+            {
+                date1 = new Date1(timeTickRecord, isMouseOrKeyboard, isUpOrDown,new MouseEventArgs(mouseButtons , 0 ,X,Y,MouseDelta) );
+            }
+            if (isMouseOrKeyboard == IsMouseOrKeyboard.Keyboard)
+            {
+                date1 = new Date1(timeTickRecord, isMouseOrKeyboard, isUpOrDown,keyEventArgs);
             }
             return date1;
         }

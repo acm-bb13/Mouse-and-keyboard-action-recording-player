@@ -118,41 +118,118 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="richTextBox1.Text" xml:space="preserve">
-    <value>using System;
+    <value>
+using System;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
+using System.Drawing;
+using System.Linq;
 using System.Text;
-namespace
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace 
 {
-    class Win32Api
+    
+    public class Date1
     {
-        [StructLayout(LayoutKind.Sequential)]
-        public class POINT
+        
+        public Int64 timeTickRecord;
+
+
+
+
+        public enum IsMouseOrKeyboard { Mouse , Keyboard };
+		
+		
+		
+		
+        public IsMouseOrKeyboard isMouseOrKeyboard;
+
+
+       
+	   
+        public enum IsUpOrDown { Up, Down,Move,Wheel};
+		
+		
+		
+        public IsUpOrDown isUpOrDown;
+        
+		
+		
+		
+        public KeyEventArgs keyEventArgs;
+
+
+        
+        public MouseEventArgs mouseEventArgs;
+        
+		
+		
+        public Date1(long timeTickRecord, IsMouseOrKeyboard isMouseOrKeyboard, IsUpOrDown isUpOrDown, MouseEventArgs mouseEventArgs)
         {
-            public int x;
-            public int y;
+            this.timeTickRecord = timeTickRecord;
+            this.isMouseOrKeyboard = isMouseOrKeyboard;
+            this.isUpOrDown = isUpOrDown;
+            this.mouseEventArgs = mouseEventArgs;
         }
-        [StructLayout(LayoutKind.Sequential)]
-        public class MouseHookStruct
+
+
+
+
+
+        public Date1(long timeTickRecord, IsMouseOrKeyboard isMouseOrKeyboard, IsUpOrDown isUpOrDown, KeyEventArgs keyEventArgs)
         {
-            public POINT pt;
-            public int hwnd;
-            public int wHitTestCode;
-            public int dwExtraInfo;
+            this.timeTickRecord = timeTickRecord;
+            this.isMouseOrKeyboard = isMouseOrKeyboard;
+            this.isUpOrDown = isUpOrDown;
+            this.keyEventArgs = keyEventArgs;
         }
-        public delegate int HookProc(int nCode, IntPtr wParam, IntPtr lParam);
-        
-        [DllImport("user32.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.StdCall)]
-        public static extern int SetWindowsHookEx(int idHook, HookProc lpfn, IntPtr hInstance, int threadId);
-        
-        [DllImport("user32.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.StdCall)]
-        public static extern bool UnhookWindowsHookEx(int idHook);
-        
-        [DllImport("user32.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.StdCall)]
-        public static extern int CallNextHookEx(int idHook, int nCode, IntPtr wParam, IntPtr lParam);
+		
+		
+		
+		
+
+        public static Date1 create(long timeTickRecord, IsMouseOrKeyboard isMouseOrKeyboard, IsUpOrDown isUpOrDown, EventArgs eventArgs)
+        {
+            Date1 date1 = null;
+            if (isMouseOrKeyboard == IsMouseOrKeyboard.Mouse)
+            {
+                date1 = new Date1(timeTickRecord, isMouseOrKeyboard, isUpOrDown, (MouseEventArgs)eventArgs);
+            }
+            if (isMouseOrKeyboard == IsMouseOrKeyboard.Keyboard)
+            {
+                date1 = new Date1(timeTickRecord, isMouseOrKeyboard, isUpOrDown, (KeyEventArgs)eventArgs);
+            }
+            return date1;
+        }
+		
+		
+		
+		
+
+        public static Date1 create(
+            long timeTickRecord, 
+            IsMouseOrKeyboard isMouseOrKeyboard,
+            IsUpOrDown isUpOrDown,
+            KeyEventArgs keyEventArgs,
+            MouseButtons mouseButtons , 
+            int X ,
+            int Y ,
+            int MouseDelta)
+        {
+            Date1 date1 = null;
+            if (isMouseOrKeyboard == IsMouseOrKeyboard.Mouse)
+            {
+                date1 = new Date1(timeTickRecord, isMouseOrKeyboard, isUpOrDown,new MouseEventArgs(mouseButtons , 0 ,X,Y,MouseDelta) );
+            }
+            if (isMouseOrKeyboard == IsMouseOrKeyboard.Keyboard)
+            {
+                date1 = new Date1(timeTickRecord, isMouseOrKeyboard, isUpOrDown,keyEventArgs);
+            }
+            return date1;
+        }
     }
-}
-</value>
+}</value>
   </data>
   <metadata name="timer1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>

@@ -1,20 +1,6 @@
 ﻿
-Mouse-and-keyboard-action-recording-player
-
-select TABLE_NAME from INFORMATION_SCHEMA.TABLES where TABLE_SCHEMA='Mouse-and-keyboard-action-recording-player' and TABLE_NAME='date1' ;
-
-CREATE TABLE `model333` (
-  `mainKey` int NOT NULL AUTO_INCREMENT,
-  `timeTickRecord` bigint NOT NULL,
-  `IsMouseOrKeyboard` enum('Mouse','Keyboard') DEFAULT NULL,
-  `IsUpOrDown` enum('Up','Down','Move','Wheel') DEFAULT NULL,
-  `KeyEventArgs` int DEFAULT NULL,
-  `MouseButtons` enum('None','Left','Right','Middle','XButton1','XButton2') DEFAULT 'None',
-  `MouseX` int DEFAULT NULL,
-  `MouseY` int DEFAULT NULL,
-  `MouseDelta` int DEFAULT NULL,
-  PRIMARY KEY (`mainKey`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+该项目为江西理工大学软件工程学院18级学生开发，
+仅供学习使用，部分代码以及图片资源来源已注明出处。
 
 《资源出处声明》：
 	键盘钩子代码来源:

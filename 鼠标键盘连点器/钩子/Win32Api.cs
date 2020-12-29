@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Text;
-namespace 鼠标键盘连点器
+namespace 动作监听播放器
 {
     /*
      * Win32Api代码复制来源:

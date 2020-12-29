@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using System.Runtime.InteropServices; //调用WINDOWS API函数时要用到
 using Microsoft.Win32; //写入注册表时要用到
 
-namespace 鼠标键盘连点器
+namespace 动作监听播放器
 {
     public partial class KeyboardTest : Form
     {

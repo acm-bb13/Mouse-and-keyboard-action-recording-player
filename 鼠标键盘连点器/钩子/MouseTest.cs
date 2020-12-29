@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace 鼠标键盘连点器
+namespace 动作监听播放器
 {
     public partial class MouseTest : Form
     {
@@ -29,6 +29,12 @@ namespace 鼠标键盘连点器
             mh.SetHook();
             mh.MouseDownEvent += mh_MouseDownEvent;
             mh.MouseUpEvent += mh_MouseUpEvent;
+            mh.MouseMoveEvent += mh_MouseMoveEvent;
+        }
+
+        private void mh_MouseMoveEvent(object sender, MouseEventArgs e)
+        {
+
         }
 
         //按下鼠标键触发的事件
