@@ -7,7 +7,7 @@
 	【梦琪小生】
 	【转】【C#】【全局键盘监听】
 	https://www.cnblogs.com/mqxs/p/7181888.html
-	http://www.bianceng.cn/Programming/csharp/201410/45484.htm
+	http://www.bianceng.cn/Programming/csharp/201410/45484.html
 
 	Win32Api代码复制来源:
 	【C#实现鼠标的全局监听】

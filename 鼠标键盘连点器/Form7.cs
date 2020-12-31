@@ -198,7 +198,7 @@ namespace 动作监听播放器
             SQLManage.closeConn();
 
             //读取动作名称长度介绍等信息
-            sql = "SELECT * FROM amainform WHERE mainKey = 22;";
+            sql = "SELECT * FROM amainform WHERE mainKey = "+ mainkey + ";";
             mySql = SQLManage.GetReader(sql);
             mySql.Read();
             formName = (string)mySql[1];

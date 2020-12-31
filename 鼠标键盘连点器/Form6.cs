@@ -94,7 +94,7 @@ namespace 动作监听播放器
         //执行开始播放功能
         void start()
         {
-            this.Visible = false;
+            //this.Visible = false;
             isPlaying = true;
             this.timer1.Enabled = true;
             timeTickConst = 1000 / timer1.Interval;
@@ -104,7 +104,7 @@ namespace 动作监听播放器
 
         void stop()
         {
-            this.Visible = true;
+            //this.Visible = true;
             isPlaying = false;
             this.timer1.Enabled = false;
             timeTickConst = 1000 / timer1.Interval;
