@@ -293,6 +293,7 @@
   <ItemGroup>
     <Content Include="A-Source-of-statement.txt" />
     <Content Include="Gma.System.MouseKeyHook.dll" />
+    <Content Include="Resources\readme.txt" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.8">
