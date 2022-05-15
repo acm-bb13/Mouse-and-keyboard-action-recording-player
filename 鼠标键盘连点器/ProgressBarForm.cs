@@ -10,16 +10,20 @@ using System.Windows.Forms;
 
 namespace 动作监听播放器
 {
-    public partial class Form5 : Form
+    public partial class ProgressBarForm : Form
     {
-        public Form5()
+        public ProgressBarForm(string str1)
         {
             InitializeComponent();
+            this.ControlBox = false;
+            this.Text = str1;
         }
 
-        private void Form5_Load(object sender, EventArgs e)
+        private void Form9_Load(object sender, EventArgs e)
         {
 
         }
+
+
     }
 }

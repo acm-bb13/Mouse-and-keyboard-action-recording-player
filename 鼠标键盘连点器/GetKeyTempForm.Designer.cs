@@ -1,7 +1,7 @@
 ﻿
 namespace 动作监听播放器
 {
-    partial class Form2
+    partial class GetKeyTempForm
     {
         /// <summary>
         /// Required designer variable.

@@ -1,7 +1,7 @@
 ﻿
 namespace 动作监听播放器
 {
-    partial class Form6
+    partial class DisplayForm
     {
         /// <summary>
         /// Required designer variable.

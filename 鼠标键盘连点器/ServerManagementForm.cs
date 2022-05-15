@@ -11,14 +11,14 @@ using System.Windows.Forms;
 
 namespace 动作监听播放器
 {
-    public partial class Form7 : Form
+    public partial class ServerManagementForm : Form
     {
-        public Form7()
+        public ServerManagementForm()
         {
             InitializeComponent();
         }
 
-        public List<Date1> dates = new List<Date1>();
+        public List<CoreData> dates = new List<CoreData>();
         public string formName;
         public string formTime;
         public string formMessage;
@@ -66,7 +66,7 @@ namespace 动作监听播放器
         //上传本地动作
         void UpData()
         {
-            Form9 form9 = new Form9("正在上传......");
+            ProgressBarForm form9 = new ProgressBarForm("正在上传......");
             form9.progressBar1.Maximum = dates.Count;
             form9.progressBar1.Step = 1;
             form9.Show();
@@ -95,7 +95,7 @@ namespace 动作监听播放器
 
             int p = 0;
             sql = "";
-            foreach (Date1 d in dates)
+            foreach (CoreData d in dates)
             {
                 //将每个动作保存至数据库中
                 sql += "INSERT INTO data" + mainKey
@@ -104,7 +104,7 @@ namespace 动作监听播放器
                     + " , IsMouseOrKeyboard = " + (int)d.isMouseOrKeyboard
                     + " , IsUpOrDown = " + (int)d.isUpOrDown + " ";
 
-                if (d.isMouseOrKeyboard == Date1.IsMouseOrKeyboard.Mouse)
+                if (d.isMouseOrKeyboard == CoreData.IsMouseOrKeyboard.Mouse)
                 {
                     sql += " , MouseButtons = " + (int)d.mouseEventArgs.Button
                     + "  , MouseX =  " + d.mouseEventArgs.X
@@ -113,7 +113,7 @@ namespace 动作监听播放器
                     + " ; ";
                 }
 
-                if (d.isMouseOrKeyboard == Date1.IsMouseOrKeyboard.Keyboard)
+                if (d.isMouseOrKeyboard == CoreData.IsMouseOrKeyboard.Keyboard)
                 {
                     sql += " , KeyEventArgs =  " + (int)d.keyEventArgs.KeyData
                         + " ; ";
@@ -152,13 +152,13 @@ namespace 动作监听播放器
             SQLManage.closeConn();
 
             //弹出加载窗口
-            Form9 form9 = new Form9("正在下载动作......");
+            ProgressBarForm form9 = new ProgressBarForm("正在下载动作......");
             form9.progressBar1.Maximum = size;
             form9.progressBar1.Step = 1;
             form9.Show();
 
             //创建临时动作保存
-            List<Date1> date1 = new List<Date1>();
+            List<CoreData> date1 = new List<CoreData>();
             sql = "SELECT * FROM data"+mainkey+" ORDER BY mainKey;";
             mySql = SQLManage.GetReader(sql);
             while (mySql.Read())
@@ -166,25 +166,25 @@ namespace 动作监听播放器
                 //将数据库的动作读取出来
 
                 long x1 = (long)mySql[1]; 
-                Date1.IsMouseOrKeyboard x2 = (Date1.IsMouseOrKeyboard)mySql[2];
-                Date1.IsUpOrDown x3 = (Date1.IsUpOrDown)mySql[3];
-                if(x2 == Date1.IsMouseOrKeyboard.Keyboard)
+                CoreData.IsMouseOrKeyboard x2 = (CoreData.IsMouseOrKeyboard)mySql[2];
+                CoreData.IsUpOrDown x3 = (CoreData.IsUpOrDown)mySql[3];
+                if(x2 == CoreData.IsMouseOrKeyboard.Keyboard)
                 {
                     Keys x4 = (Keys)mySql[4];
-                    date1.Add(Date1.create(
+                    date1.Add(CoreData.create(
                         x1,
                     x2,
                     x3,
                     new KeyEventArgs(x4)
                     ));
                 }
-                if (x2 == Date1.IsMouseOrKeyboard.Mouse)
+                if (x2 == CoreData.IsMouseOrKeyboard.Mouse)
                 {
                     MouseButtons x5 = (MouseButtons)mySql[5];
                     int x6 = (int)mySql[6];
                     int x7 = (int)mySql[7];
                     int x8 = (int)mySql[8];
-                    date1.Add(Date1.create(
+                    date1.Add(CoreData.create(
                         x1,
                     x2,
                     x3,
@@ -222,7 +222,7 @@ namespace 动作监听播放器
         //点击上传动作时
         private void button1_Click(object sender, EventArgs e)
         {
-            Form8 form8 = new Form8();
+            ServerUploadForm form8 = new ServerUploadForm();
             form8.formTime = formTime;
 
             form8.ShowDialog();
@@ -258,7 +258,7 @@ namespace 动作监听播放器
             string s1 = dataGridView1.Rows[index].Cells[1].Value.ToString();
             string s2 = dataGridView1.Rows[index].Cells[2].Value.ToString();
             string s3 = dataGridView1.Rows[index].Cells[3].Value.ToString();
-            Form10 form10 = new Form10(s1,s2,s3);
+            ServerDownloadForm form10 = new ServerDownloadForm(s1,s2,s3);
             form10.ShowDialog();
             if (form10.isAns)
             {

@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace 动作监听播放器
 {
-    public partial class Form6 : Form
+    public partial class DisplayForm : Form
     {
-        public Form6()
+        public DisplayForm()
         {
             InitializeComponent();
         }
@@ -32,7 +32,7 @@ namespace 动作监听播放器
         [System.Runtime.InteropServices.DllImport("user32.dll")]
         public static extern void keybd_event(byte bVk, byte bScan, int dwFlags, int dwExtraInfo);
 
-        public List<Date1> dateArr = new List<Date1>();
+        public List<CoreData> dateArr = new List<CoreData>();
         int p = 0;
 
 
@@ -119,10 +119,10 @@ namespace 动作监听播放器
                 while(p < dateArr.Count && dateArr.ElementAt(p).timeTickRecord <= timeTickRecord)
                 {
                     //保存当前动作
-                    Date1 d = dateArr.ElementAt(p);
+                    CoreData d = dateArr.ElementAt(p);
 
                     if (d.isMouseOrKeyboard
-                        == Date1.IsMouseOrKeyboard.Mouse)
+                        == CoreData.IsMouseOrKeyboard.Mouse)
                     {
                         //0x8000采用绝对坐标
                         //0x0001移动鼠标
@@ -133,22 +133,22 @@ namespace 动作监听播放器
                         {
                             if (d.mouseEventArgs.Button == MouseButtons.Left)
                             {
-                                if (d.isUpOrDown == Date1.IsUpOrDown.Down)
+                                if (d.isUpOrDown == CoreData.IsUpOrDown.Down)
                                 {
                                     dwFlags |= 0x0002;
                                 }
-                                if (d.isUpOrDown == Date1.IsUpOrDown.Up)
+                                if (d.isUpOrDown == CoreData.IsUpOrDown.Up)
                                 {
                                     dwFlags |= 0x0004;
                                 }
                             }
                             if (d.mouseEventArgs.Button == MouseButtons.Right)
                             {
-                                if (d.isUpOrDown == Date1.IsUpOrDown.Down)
+                                if (d.isUpOrDown == CoreData.IsUpOrDown.Down)
                                 {
                                     dwFlags |= 0x0008;
                                 }
-                                if (d.isUpOrDown == Date1.IsUpOrDown.Up)
+                                if (d.isUpOrDown == CoreData.IsUpOrDown.Up)
                                 {
                                     dwFlags |= 0x0010;
                                 }
@@ -166,11 +166,11 @@ namespace 动作监听播放器
                     }
 
                     if (d.isMouseOrKeyboard
-                        == Date1.IsMouseOrKeyboard.Keyboard)
+                        == CoreData.IsMouseOrKeyboard.Keyboard)
                     {
 
                         int dwFlags = 0;
-                        if (d.isUpOrDown == Date1.IsUpOrDown.Up)
+                        if (d.isUpOrDown == CoreData.IsUpOrDown.Up)
                             dwFlags = 2;
                         keybd_event((byte)d.keyEventArgs.KeyValue
                             ,0,dwFlags,0);
@@ -263,7 +263,7 @@ namespace 动作监听播放器
 
         KeyboardHook k_hook;
 
-        internal List<Date1> DateArr { get => dateArr; set => dateArr = value; }
+        internal List<CoreData> DateArr { get => dateArr; set => dateArr = value; }
 
         //载入监听模块
         private void Keyboard_Load()
@@ -333,7 +333,7 @@ namespace 动作监听播放器
         //更改快捷方式
         private void button2_Click(object sender, EventArgs e)
         {
-            Form2 form2 = new Form2();
+            GetKeyTempForm form2 = new GetKeyTempForm();
             form2.ShowDialog();
             if (form2.ppp == 0)
                 keyEnd = form2.keyArr;

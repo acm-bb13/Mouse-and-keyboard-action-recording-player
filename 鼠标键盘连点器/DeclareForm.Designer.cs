@@ -1,7 +1,7 @@
 ﻿
 namespace 动作监听播放器
 {
-    partial class Form13
+    partial class DeclareForm
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@ namespace 动作监听播放器
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form13));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DeclareForm));
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 

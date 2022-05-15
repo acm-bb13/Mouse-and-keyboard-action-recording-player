@@ -43,6 +43,7 @@ namespace 动作监听播放器
             this.button5 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.LoginBotton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -205,12 +206,27 @@ namespace 动作监听播放器
             this.pictureBox1.TabIndex = 9;
             this.pictureBox1.TabStop = false;
             // 
+            // LoginBotton
+            // 
+            this.LoginBotton.BackColor = System.Drawing.Color.Black;
+            this.LoginBotton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.LoginBotton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.LoginBotton.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.LoginBotton.ForeColor = System.Drawing.Color.Aqua;
+            this.LoginBotton.Location = new System.Drawing.Point(10, 2);
+            this.LoginBotton.Name = "LoginBotton";
+            this.LoginBotton.Size = new System.Drawing.Size(87, 35);
+            this.LoginBotton.TabIndex = 17;
+            this.LoginBotton.Text = "登录";
+            this.LoginBotton.UseVisualStyleBackColor = false;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.ClientSize = new System.Drawing.Size(719, 505);
+            this.Controls.Add(this.LoginBotton);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button10);
             this.Controls.Add(this.button4);
@@ -245,6 +261,7 @@ namespace 动作监听播放器
         private System.Windows.Forms.Button button10;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button LoginBotton;
     }
 }
 

@@ -16,7 +16,7 @@ namespace 动作监听播放器
         {
             if(conns == null)
             {
-                string connetStr = "server=www.bb13.xyz;port=3306;user=root;password=123456;database=Mouse-and-keyboard-action-recording-player;Charset=utf8;";
+                string connetStr = "server=localhost;port=3306;user=root;password=123456;database=Mouse-and-keyboard-action-recording-player;Charset=utf8;";
                 conns = new MySqlConnection(connetStr);
             }
             return conns;

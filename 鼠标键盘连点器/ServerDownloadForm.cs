@@ -10,22 +10,15 @@ using System.Windows.Forms;
 
 namespace 动作监听播放器
 {
-    public partial class Form11 : Form
+    public partial class ServerDownloadForm : Form
     {
         public bool isAns = false;
-        public Form11(string s1, string s2, string s3 , string s4 , string s5)
+        public ServerDownloadForm(string s1,string s2,string s3)
         {
             InitializeComponent();
-            this.Text = s1;
-            textBox1.Text = s2;
-            label4.Text = s3;
-            richTextBox1.Text = s4;
-            button1.Text = s5;
-        }
-
-        private void Form11_Load(object sender, EventArgs e)
-        {
-
+            label5.Text = s1;
+            label4.Text = s2;
+            richTextBox1.Text = s3;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -36,7 +29,13 @@ namespace 动作监听播放器
 
         private void button2_Click(object sender, EventArgs e)
         {
+            isAns = false;
             this.Close();
+        }
+
+        private void Form10_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

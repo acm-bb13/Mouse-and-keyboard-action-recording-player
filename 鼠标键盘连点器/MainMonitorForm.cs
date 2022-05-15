@@ -11,11 +11,11 @@ using System.Windows.Forms;
 using System.Runtime.InteropServices;
 namespace 动作监听播放器
 {
-    public partial class Form3 : Form
+    public partial class MainMonitorForm : Form
     {
         
 
-        public Form3()
+        public MainMonitorForm()
         {
             InitializeComponent();
         }
@@ -23,7 +23,7 @@ namespace 动作监听播放器
         
 
         //DateArr获取;
-        private List<Date1> dateArr = new List<Date1>();
+        private List<CoreData> dateArr = new List<CoreData>();
 
         //动作信息
         public string formName;
@@ -78,9 +78,9 @@ namespace 动作监听播放器
             if(mh != null)
             {
                 var e2 = new MouseEventArgs(MouseButtons.None, 0, p3.X, p3.Y, 0);
-                dateArr.Add(Date1.create(timeTickRecord,
-                Date1.IsMouseOrKeyboard.Mouse,
-                Date1.IsUpOrDown.Move,
+                dateArr.Add(CoreData.create(timeTickRecord,
+                CoreData.IsMouseOrKeyboard.Mouse,
+                CoreData.IsUpOrDown.Move,
                 e2));
             }
         }
@@ -194,9 +194,9 @@ namespace 动作监听播放器
             }
             p1 = e.Location;
             t1 = timeTickRecord;
-            dateArr.Add(Date1.create(timeTickRecord,
-                Date1.IsMouseOrKeyboard.Mouse,
-                Date1.IsUpOrDown.Down,
+            dateArr.Add(CoreData.create(timeTickRecord,
+                CoreData.IsMouseOrKeyboard.Mouse,
+                CoreData.IsUpOrDown.Down,
                 e));
         }
         //松开鼠标键触发的事件
@@ -235,9 +235,9 @@ namespace 动作监听播放器
             LeftTag = false;
             p1 = new Point(0, 0);
             p2 = new Point(0, 0);
-            dateArr.Add(Date1.create(timeTickRecord,
-                Date1.IsMouseOrKeyboard.Mouse,
-                Date1.IsUpOrDown.Up,
+            dateArr.Add(CoreData.create(timeTickRecord,
+                CoreData.IsMouseOrKeyboard.Mouse,
+                CoreData.IsUpOrDown.Up,
                 e));
         }
 
@@ -269,9 +269,9 @@ namespace 动作监听播放器
             text += "\n============\n";
             richTextBox1.Text = text + richTextBox1.Text;
 
-            dateArr.Add(Date1.create(timeTickRecord,
-                Date1.IsMouseOrKeyboard.Mouse,
-                Date1.IsUpOrDown.Wheel,
+            dateArr.Add(CoreData.create(timeTickRecord,
+                CoreData.IsMouseOrKeyboard.Mouse,
+                CoreData.IsUpOrDown.Wheel,
                 e));
         }
 
@@ -281,7 +281,7 @@ namespace 动作监听播放器
 
         KeyboardHook k_hook;
 
-        internal List<Date1> DateArr { get => dateArr; set => dateArr = value; }
+        internal List<CoreData> DateArr { get => dateArr; set => dateArr = value; }
 
         //载入监听模块
         private void Keyboard_Load()
@@ -345,9 +345,9 @@ namespace 动作监听播放器
             text += timeToString() + "按下了:" + e.KeyData.ToString() + "键\n";
             text += "============\n";
             richTextBox1.Text = text + richTextBox1.Text;
-            dateArr.Add(Date1.create(timeTickRecord,
-                Date1.IsMouseOrKeyboard.Keyboard,
-                Date1.IsUpOrDown.Down,
+            dateArr.Add(CoreData.create(timeTickRecord,
+                CoreData.IsMouseOrKeyboard.Keyboard,
+                CoreData.IsUpOrDown.Down,
                 e));
         }
 
@@ -363,9 +363,9 @@ namespace 动作监听播放器
             text += timeToString() + "松开了:" + e.KeyData.ToString() + "键\n";
             text += "============\n";
             richTextBox1.Text = text + richTextBox1.Text;
-            dateArr.Add(Date1.create(timeTickRecord,
-                Date1.IsMouseOrKeyboard.Keyboard,
-                Date1.IsUpOrDown.Up,
+            dateArr.Add(CoreData.create(timeTickRecord,
+                CoreData.IsMouseOrKeyboard.Keyboard,
+                CoreData.IsUpOrDown.Up,
                 e));
             
         }

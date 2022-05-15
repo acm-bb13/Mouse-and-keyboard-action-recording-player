@@ -1,0 +1,213 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="动作监听播放器.CoreData">
+    <Position X="2.25" Y="6" Width="2.25" />
+    <NestedTypes>
+      <Enum Name="动作监听播放器.CoreData.IsMouseOrKeyboard" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>CoreData.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+      <Enum Name="动作监听播放器.CoreData.IsUpOrDown" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>CoreData.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAAAAAAAAAAAAAAAAAAQAAAAkABBAAAAAAA=</HashCode>
+      <FileName>CoreData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="动作监听播放器.DeclareForm" Collapsed="true">
+    <Position X="2.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAACAAAACAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>DeclareForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="动作监听播放器.DisplayForm" Collapsed="true">
+    <Position X="4" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACQAAAgAICAEABAiAoCAAgCSQCC5IAAEMGQAQACACAo=</HashCode>
+      <FileName>DisplayForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="动作监听播放器.FileMainForm" Collapsed="true">
+    <Position X="5.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAwAAACAgAAAQAgCAAAACAAASAAIAACIBAABEAAA=</HashCode>
+      <FileName>FileMainForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="动作监听播放器.FileSaveForm" Collapsed="true">
+    <Position X="7.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAABAAAACAACACAAAYAAAAEGAQAACAAAA=</HashCode>
+      <FileName>FileSaveForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="动作监听播放器.Form5" Collapsed="true">
+    <Position X="9.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAABAAAACAAAACAMw7AEAAAAAAAAAAAAA=</HashCode>
+      <FileName>Form5.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="动作监听播放器.GetKeyTempForm" Collapsed="true">
+    <Position X="0.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAIAAACAAABAAAACAAAACAAAAAAAEAAEAQAAAAAA=</HashCode>
+      <FileName>GetKeyTempForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="动作监听播放器.MainForm">
+    <Position X="9" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACQAAQwAACgAgBAAAACAEACCAMhrIEIIQXIfEABEQAA=</HashCode>
+      <FileName>MainForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="动作监听播放器.MainKeySettingForm" Collapsed="true">
+    <Position X="7.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACgAgBAAAACAAACCAMz7AAIAwHQPUAAAAAA=</HashCode>
+      <FileName>MainKeySettingForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="动作监听播放器.MainMonitorForm" Collapsed="true">
+    <Position X="9.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAQAAQgQICAAABCCBpCAAgCCSBEaYgIBgGwT0AAECAA=</HashCode>
+      <FileName>MainMonitorForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="动作监听播放器.Program" Collapsed="true">
+    <Position X="4" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="动作监听播放器.ProgressBarForm" Collapsed="true">
+    <Position X="5.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAQACAAAAAAAACAAAACAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ProgressBarForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="动作监听播放器.ServerDownloadForm" Collapsed="true">
+    <Position X="9.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAABAAAACAACACAAAYAAAAAGAQAACAAAA=</HashCode>
+      <FileName>ServerDownloadForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="动作监听播放器.ServerManagementForm" Collapsed="true">
+    <Position X="0.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAQAAQAAACABAAAAAgCAAAACAAg4AAIAAHoAAAAEAAA=</HashCode>
+      <FileName>ServerManagementForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="动作监听播放器.ServerUploadForm" Collapsed="true">
+    <Position X="2.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAASAAACEAABAAAACAAAACAAAYAAIAEGAQAAAEgAA=</HashCode>
+      <FileName>ServerUploadForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="动作监听播放器.SQLManage" Collapsed="true">
+    <Position X="5.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAIAAAAYAAAAAAAAAAQAABAAAAAAAAAAAAA=</HashCode>
+      <FileName>SQLManage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="动作监听播放器.SurprisedForm">
+    <Position X="12.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAABAAAASAAAACAAAgAAAAAAAQAADAAAA=</HashCode>
+      <FileName>SurprisedForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="动作监听播放器.UserData">
+    <Position X="5.25" Y="6.25" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>ggAAAAAAAAAAAAAAAAAAAAAAgAAQAAAAAAAAEAABAAA=</HashCode>
+      <FileName>UserData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="动作监听播放器.UserLogin" Collapsed="true">
+    <Position X="0.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAACAAABAAAACAAAACAAAYAAAAEAAAAAQAAAA=</HashCode>
+      <FileName>UserLogin.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="动作监听播放器.KeyboardHook" Collapsed="true">
+    <Position X="2.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gEAgABAAASEACAAAEAAADAAAASAAAAgALCAAAgAgACA=</HashCode>
+      <FileName>钩子\KeyboardHook.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="动作监听播放器.KeyboardTest" Collapsed="true">
+    <Position X="4" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAACAAAAAAAACAAAACAAAAAAAAAAAQAAAACAA=</HashCode>
+      <FileName>钩子\KeyboardTest.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="动作监听播放器.MouseHook" Collapsed="true">
+    <Position X="0.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIABACCAAAACggCAAAAAAAAgAIBAAAAABQAAAJEEoIQ=</HashCode>
+      <FileName>钩子\MouseHook.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="动作监听播放器.MouseTest" Collapsed="true">
+    <Position X="2.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAACQABCAAgACAAEAAgAAgAASQAAAIAA=</HashCode>
+      <FileName>钩子\MouseTest.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="动作监听播放器.Win32Api" Collapsed="true">
+    <Position X="2.25" Y="4.5" Width="1.5" />
+    <NestedTypes>
+      <Class Name="动作监听播放器.Win32Api.POINT" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>钩子\Win32Api.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+      <Class Name="动作监听播放器.Win32Api.MouseHookStruct" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>钩子\Win32Api.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+      <Delegate Name="动作监听播放器.Win32Api.HookProc" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>钩子\Win32Api.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAADAAAAAAAAAAAAAAAAAAgAAA=</HashCode>
+      <FileName>钩子\Win32Api.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="动作监听播放器.Properties.Resources" Collapsed="true">
+    <Position X="7.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAABEAAAAQAEAAAAAAAAAAAAAIA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="动作监听播放器.Properties.Settings" Collapsed="true">
+    <Position X="4" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Microsoft YaHei UI" Size="9" />
+</ClassDiagram>

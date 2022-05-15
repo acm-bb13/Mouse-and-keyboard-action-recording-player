@@ -1,7 +1,7 @@
 ﻿
 namespace 动作监听播放器
 {
-    partial class Form9
+    partial class ProgressBarForm
     {
         /// <summary>
         /// Required designer variable.

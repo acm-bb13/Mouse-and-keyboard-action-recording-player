@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace 动作监听播放器
 {
-    public partial class Form2 : Form
+    public partial class GetKeyTempForm : Form
     {
-        public Form2()
+        public GetKeyTempForm()
         {
             InitializeComponent();
         }

@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace 动作监听播放器
 {
-    public partial class Form8 : Form
+    public partial class ServerUploadForm : Form
     {
-        public Form8()
+        public ServerUploadForm()
         {
             InitializeComponent();
         }

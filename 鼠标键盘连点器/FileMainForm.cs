@@ -12,9 +12,9 @@ using Microsoft.Win32;
 
 namespace 动作监听播放器
 {
-    public partial class Form4 : Form
+    public partial class FileMainForm : Form
     {
-        public Form4()
+        public FileMainForm()
         {
             InitializeComponent();
         }
@@ -23,7 +23,7 @@ namespace 动作监听播放器
         public MainForm mainForm;
 
         //监听数据
-        public List<Date1> dates = new List<Date1>();
+        public List<CoreData> dates = new List<CoreData>();
         public string formName;
         public string formTime;
         public string formMessage;
@@ -46,7 +46,7 @@ namespace 动作监听播放器
             string s3 = formTime;
             string s4 = formMessage;
             string s5 = "保存";
-            Form11 form11 = new Form11(s1,s2,s3,s4,s5);
+            FileSaveForm form11 = new FileSaveForm(s1,s2,s3,s4,s5);
             form11.ShowDialog();
             if (form11.isAns)
             {
@@ -73,19 +73,19 @@ namespace 动作监听播放器
                 sw.WriteLine(formMessage);
                 result = "<!===================================!>";
                 sw.WriteLine(result);
-                foreach(Date1 d in dates)
+                foreach(CoreData d in dates)
                 {
                     string str = "";
                     str += d.timeTickRecord + ",";
                     str += (int)d.isMouseOrKeyboard + ",";
                     str += (int)d.isUpOrDown + ",";
 
-                    if(d.isMouseOrKeyboard == Date1.IsMouseOrKeyboard.Keyboard)
+                    if(d.isMouseOrKeyboard == CoreData.IsMouseOrKeyboard.Keyboard)
                     {
                         str += (int)d.keyEventArgs.KeyData ;
                     }
 
-                    if (d.isMouseOrKeyboard == Date1.IsMouseOrKeyboard.Mouse)
+                    if (d.isMouseOrKeyboard == CoreData.IsMouseOrKeyboard.Mouse)
                     {
                         str += (int)d.mouseEventArgs.Button + ",";
                         str += d.mouseEventArgs.X + ",";
@@ -126,7 +126,7 @@ namespace 动作监听播放器
                     else if (mod == 1)
                     {
                         mod = 2;
-                        dates = new List<Date1>();
+                        dates = new List<CoreData>();
                         continue;
                     }
                     if (mod == 2)
@@ -157,25 +157,25 @@ namespace 动作监听播放器
                     {
                         string[] str = line.Split(',');
                         long x1 = long.Parse(str[0]);
-                        Date1.IsMouseOrKeyboard x2 = (Date1.IsMouseOrKeyboard)int.Parse(str[1]);
-                        Date1.IsUpOrDown x3 = (Date1.IsUpOrDown)int.Parse(str[2]);
-                        if (x2 == Date1.IsMouseOrKeyboard.Keyboard)
+                        CoreData.IsMouseOrKeyboard x2 = (CoreData.IsMouseOrKeyboard)int.Parse(str[1]);
+                        CoreData.IsUpOrDown x3 = (CoreData.IsUpOrDown)int.Parse(str[2]);
+                        if (x2 == CoreData.IsMouseOrKeyboard.Keyboard)
                         {
                             Keys x4 = (Keys)int.Parse(str[3]);
-                            dates.Add(Date1.create(
+                            dates.Add(CoreData.create(
                                 x1,
                             x2,
                             x3,
                             new KeyEventArgs(x4)
                             ));
                         }
-                        if (x2 == Date1.IsMouseOrKeyboard.Mouse)
+                        if (x2 == CoreData.IsMouseOrKeyboard.Mouse)
                         {
                             MouseButtons x5 = (MouseButtons)int.Parse(str[3]);
                             int x6 = int.Parse(str[4]);
                             int x7 = int.Parse(str[5]);
                             int x8 = int.Parse(str[6]);
-                            dates.Add(Date1.create(
+                            dates.Add(CoreData.create(
                                 x1,
                             x2,
                             x3,

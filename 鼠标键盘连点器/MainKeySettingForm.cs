@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace 动作监听播放器
 {
-    public partial class Form1 : Form
+    public partial class MainKeySettingForm : Form
     {
 
         public bool play = false;
@@ -20,7 +20,7 @@ namespace 动作监听播放器
         public SortedSet<int> keyEnd = new SortedSet<int>();
 
 
-        public Form1()
+        public MainKeySettingForm()
         {
             InitializeComponent();
         }
@@ -80,7 +80,7 @@ namespace 动作监听播放器
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Form2 form2 = new Form2();
+            GetKeyTempForm form2 = new GetKeyTempForm();
             form2.ShowDialog();
             keyStart = form2.keyArr;
             form2.Dispose();
@@ -98,7 +98,7 @@ namespace 动作监听播放器
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Form2 form2 = new Form2();
+            GetKeyTempForm form2 = new GetKeyTempForm();
             form2.ShowDialog();
             if (form2.ppp == 0)
                 keyDisplay = form2.keyArr;
@@ -117,7 +117,7 @@ namespace 动作监听播放器
 
         private void button4_Click(object sender, EventArgs e)
         {
-            Form2 form2 = new Form2();
+            GetKeyTempForm form2 = new GetKeyTempForm();
             form2.ShowDialog();
             if (form2.ppp == 0)
                 keyEnd = form2.keyArr;

@@ -1,7 +1,7 @@
 ﻿
 namespace 动作监听播放器
 {
-    partial class Form4
+    partial class FileMainForm
     {
         /// <summary>
         /// Required designer variable.

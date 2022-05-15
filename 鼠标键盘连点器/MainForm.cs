@@ -34,7 +34,7 @@ namespace 动作监听播放器
         //获取监听数据
         public Int64 timeTickConst = 10;
 
-        public List<Date1> dates = new List<Date1>();
+        public List<CoreData> dates = new List<CoreData>();
         public string formName = "未命名";
         public string formTime = "0秒";
         public string formMessage = "无描述";
@@ -48,7 +48,7 @@ namespace 动作监听播放器
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Form13 form13 = new Form13();
+            DeclareForm form13 = new DeclareForm();
             form13.ShowDialog();
         }
 
@@ -98,9 +98,9 @@ namespace 动作监听播放器
         //打开监听窗口
         private void button7_Click(object sender, EventArgs e)
         {
-            Form3 form3 = null;
+            MainMonitorForm form3 = null;
             this.Visible = false;
-            Form1 form1 = new Form1();
+            MainKeySettingForm form1 = new MainKeySettingForm();
             //读取按键
             form1.keyStart = keyStart;
             form1.keyDisplay = keyDisplay;
@@ -114,7 +114,7 @@ namespace 动作监听播放器
             form1.Dispose();
             if (play)
             {
-                form3 = new Form3();
+                form3 = new MainMonitorForm();
                 //读取按键
                 form3.keyStart = keyStart;
                 form3.keyDisplay = keyDisplay;
@@ -173,7 +173,7 @@ namespace 动作监听播放器
         private void button9_Click(object sender, EventArgs e)
         {
             this.Visible = false;
-            Form6 form6 = new Form6();
+            DisplayForm form6 = new DisplayForm();
             form6.dateArr = dates;
             form6.keyEnd = keyEnd;
             form6.mainForm = this;
@@ -183,7 +183,7 @@ namespace 动作监听播放器
         private void button4_Click(object sender, EventArgs e)
         {
             //this.Visible = false;
-            Form7 form7 = new Form7();
+            ServerManagementForm form7 = new ServerManagementForm();
             form7.dates = dates;
             form7.formName = formName;
             form7.formTime = formTime;
@@ -198,7 +198,7 @@ namespace 动作监听播放器
         private void button10_Click(object sender, EventArgs e)
         {
             //this.Visible = false;
-            Form4 form4 = new Form4();
+            FileMainForm form4 = new FileMainForm();
             form4.dates = dates;
             form4.formName = formName;
             form4.formTime = formTime;
@@ -214,7 +214,7 @@ namespace 动作监听播放器
 
         private void button5_Click(object sender, EventArgs e)
         {
-            Form12 form12 = new Form12();
+            SurprisedForm form12 = new SurprisedForm();
             form12.ShowDialog();
         }
     }

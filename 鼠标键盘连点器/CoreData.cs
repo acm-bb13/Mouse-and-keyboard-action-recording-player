@@ -9,7 +9,7 @@ using System.Windows.Forms;
 namespace 动作监听播放器
 {
     //用来储存动作信息
-    public class Date1
+    public class CoreData
     {
         //记录xx时刻，鼠标还是键盘，哪个按键，按下还是松开
         public Int64 timeTickRecord;
@@ -30,7 +30,7 @@ namespace 动作监听播放器
 
 
         //一个用来创建键盘，一个用来创建鼠标事件
-        public Date1(long timeTickRecord, IsMouseOrKeyboard isMouseOrKeyboard, IsUpOrDown isUpOrDown, MouseEventArgs mouseEventArgs)
+        public CoreData(long timeTickRecord, IsMouseOrKeyboard isMouseOrKeyboard, IsUpOrDown isUpOrDown, MouseEventArgs mouseEventArgs)
         {
             this.timeTickRecord = timeTickRecord;
             this.isMouseOrKeyboard = isMouseOrKeyboard;
@@ -38,7 +38,7 @@ namespace 动作监听播放器
             this.mouseEventArgs = mouseEventArgs;
         }
 
-        public Date1(long timeTickRecord, IsMouseOrKeyboard isMouseOrKeyboard, IsUpOrDown isUpOrDown, KeyEventArgs keyEventArgs)
+        public CoreData(long timeTickRecord, IsMouseOrKeyboard isMouseOrKeyboard, IsUpOrDown isUpOrDown, KeyEventArgs keyEventArgs)
         {
             this.timeTickRecord = timeTickRecord;
             this.isMouseOrKeyboard = isMouseOrKeyboard;
@@ -46,21 +46,21 @@ namespace 动作监听播放器
             this.keyEventArgs = keyEventArgs;
         }
 
-        public static Date1 create(long timeTickRecord, IsMouseOrKeyboard isMouseOrKeyboard, IsUpOrDown isUpOrDown, EventArgs eventArgs)
+        public static CoreData create(long timeTickRecord, IsMouseOrKeyboard isMouseOrKeyboard, IsUpOrDown isUpOrDown, EventArgs eventArgs)
         {
-            Date1 date1 = null;
+            CoreData date1 = null;
             if (isMouseOrKeyboard == IsMouseOrKeyboard.Mouse)
             {
-                date1 = new Date1(timeTickRecord, isMouseOrKeyboard, isUpOrDown, (MouseEventArgs)eventArgs);
+                date1 = new CoreData(timeTickRecord, isMouseOrKeyboard, isUpOrDown, (MouseEventArgs)eventArgs);
             }
             if (isMouseOrKeyboard == IsMouseOrKeyboard.Keyboard)
             {
-                date1 = new Date1(timeTickRecord, isMouseOrKeyboard, isUpOrDown, (KeyEventArgs)eventArgs);
+                date1 = new CoreData(timeTickRecord, isMouseOrKeyboard, isUpOrDown, (KeyEventArgs)eventArgs);
             }
             return date1;
         }
 
-        public static Date1 create(
+        public static CoreData create(
             long timeTickRecord, 
             IsMouseOrKeyboard isMouseOrKeyboard,
             IsUpOrDown isUpOrDown,
@@ -70,14 +70,14 @@ namespace 动作监听播放器
             int Y ,
             int MouseDelta)
         {
-            Date1 date1 = null;
+            CoreData date1 = null;
             if (isMouseOrKeyboard == IsMouseOrKeyboard.Mouse)
             {
-                date1 = new Date1(timeTickRecord, isMouseOrKeyboard, isUpOrDown,new MouseEventArgs(mouseButtons , 0 ,X,Y,MouseDelta) );
+                date1 = new CoreData(timeTickRecord, isMouseOrKeyboard, isUpOrDown,new MouseEventArgs(mouseButtons , 0 ,X,Y,MouseDelta) );
             }
             if (isMouseOrKeyboard == IsMouseOrKeyboard.Keyboard)
             {
-                date1 = new Date1(timeTickRecord, isMouseOrKeyboard, isUpOrDown,keyEventArgs);
+                date1 = new CoreData(timeTickRecord, isMouseOrKeyboard, isUpOrDown,keyEventArgs);
             }
             return date1;
         }

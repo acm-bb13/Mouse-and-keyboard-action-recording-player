@@ -1,7 +1,7 @@
 ﻿
 namespace 动作监听播放器
 {
-    partial class Form12
+    partial class SurprisedForm
     {
         /// <summary>
         /// Required designer variable.
